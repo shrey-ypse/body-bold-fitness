@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #13ec37;
+  --color-primary-dark: #0ebc2c;
+  --color-background-dark: #080808;
+  --color-background-light: #fefefe;
+  --color-neutral-dark: #121212;
+  --color-neutral-light: #f5f5f7;
+
+  --font-lexend: "Lexend", sans-serif;
+
+  --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-lexend);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    touch-action: manipulation;
+  }
+
+  body {
+    @apply bg-background-light text-neutral-dark dark:bg-background-dark dark:text-white transition-colors duration-500 antialiased selection:bg-primary selection:text-black;
+    overflow-x: hidden;
+  }
+
+  /* Performance optimization utilities */
+  .transform-gpu {
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
+
+  .content-visibility-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 500px;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/10 backdrop-blur-xl border border-white/10;
+    will-change: backdrop-filter;
+    /* Optimization for glassmorphism */
+  }
+
+  .glass-dark {
+    @apply bg-black/40 backdrop-blur-2xl border border-white/5;
+    will-change: backdrop-filter;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(19, 236, 55, 0.3);
+  }
+
+  .premium-gradient {
+    background: linear-gradient(135deg, rgba(19, 236, 55, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+  }
+}
+
+@layer utilities {
+  .masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-rows: 250px;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .masonry-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .masonry-item-large {
+    grid-column: span 1;
+    grid-row: span 2;
+  }
+
+  @media (min-width: 768px) {
+    .masonry-item-large {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+  }
+
+  .masonry-item-tall {
+    grid-row: span 2;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080808;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #121212;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #13ec37;
+}
+
+/* Reduce Motion / Performance optimization for slower devices */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
