@@ -158,9 +158,9 @@ export default function AdminPanel() {
 
     return (
         <div className="min-h-screen bg-background-dark text-white font-lexend selection:bg-primary selection:text-black">
-            {/* Ultra Sidebar */}
-            <div className="fixed left-0 top-0 bottom-0 w-24 md:w-72 bg-black/60 backdrop-blur-3xl border-r border-white/5 flex flex-col p-6 md:p-10 z-[60]">
-                <div className="mb-16 hidden md:block">
+            {/* Ultra Sidebar - Desktop / Bottom Nav - Mobile */}
+            <div className="fixed left-0 bottom-0 md:top-0 w-full md:w-24 lg:w-72 bg-black/80 md:bg-black/60 backdrop-blur-3xl border-t md:border-t-0 md:border-r border-white/5 flex flex-row md:flex-col p-4 md:p-6 lg:p-10 z-[60] justify-around md:justify-start">
+                <div className="mb-16 hidden lg:block">
                     <div className="flex items-center gap-2 mb-2">
                         <div className="w-2 h-2 bg-primary rounded-full animate-ping" />
                         <span className="text-[10px] font-bold text-primary uppercase tracking-[0.3em]">System Live</span>
@@ -168,14 +168,14 @@ export default function AdminPanel() {
                     <span className="text-3xl font-black tracking-tighter uppercase whitespace-nowrap">BODY <span className="text-primary">BOLD</span> FITNESS</span>
                 </div>
 
-                <div className="flex flex-col space-y-4">
-                    <SidebarLink icon={<LayoutDashboard size={22} />} label="Overview" active={activeTab === "overview"} onClick={() => setActiveTab("overview")} />
-                    <SidebarLink icon={<Package size={22} />} label="Products" active={activeTab === "inventory"} onClick={() => setActiveTab("inventory")} />
-                    <SidebarLink icon={<BookOpen size={22} />} label="Blog Vault" active={activeTab === "blog"} onClick={() => setActiveTab("blog")} />
+                <div className="flex flex-row md:flex-col space-x-2 md:space-x-0 md:space-y-4 w-full md:w-auto">
+                    <SidebarLink icon={<LayoutDashboard size={20} className="lg:w-5.5 lg:h-5.5" />} label="Home" active={activeTab === "overview"} onClick={() => setActiveTab("overview")} />
+                    <SidebarLink icon={<Package size={20} className="lg:w-5.5 lg:h-5.5" />} label="Gear" active={activeTab === "inventory"} onClick={() => setActiveTab("inventory")} />
+                    <SidebarLink icon={<BookOpen size={20} className="lg:w-5.5 lg:h-5.5" />} label="Vault" active={activeTab === "blog"} onClick={() => setActiveTab("blog")} />
                 </div>
 
-                <div className="mt-auto space-y-6">
-                    <div className="hidden md:block p-6 rounded-3xl bg-white/5 border border-white/5">
+                <div className="mt-auto hidden md:flex flex-col space-y-6">
+                    <div className="hidden lg:block p-6 rounded-3xl bg-white/5 border border-white/5">
                         <p className="text-[9px] uppercase tracking-widest text-white/40 mb-2">Server Load</p>
                         <div className="h-1 bg-white/10 rounded-full">
                             <motion.div initial={{ width: 0 }} animate={{ width: "24%" }} className="h-full bg-primary rounded-full" />
@@ -186,15 +186,15 @@ export default function AdminPanel() {
                             setIsAuthenticated(false);
                             addNotification("Logged out successfully.", "success");
                         }}
-                        className="w-full p-4 md:px-6 md:py-5 rounded-3xl text-white/40 hover:text-white hover:bg-red-500/20 transition-all text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center md:justify-start gap-4 border border-transparent hover:border-red-500/20"
+                        className="w-full p-4 lg:px-6 lg:py-5 rounded-3xl text-white/40 hover:text-white hover:bg-red-500/20 transition-all text-[10px] font-black uppercase tracking-[0.2em] flex items-center justify-center lg:justify-start gap-4 border border-transparent hover:border-red-500/20"
                     >
                         <CloseIcon size={18} />
-                        <span className="hidden md:inline">Log Out</span>
+                        <span className="hidden lg:inline">Log Out</span>
                     </button>
                 </div>
             </div>
 
-            <main className="ml-24 md:ml-72 p-8 md:p-16 lg:p-20 min-h-screen relative">
+            <main className="pb-24 md:pb-8 md:ml-24 lg:ml-72 p-6 md:p-12 lg:p-20 min-h-screen relative">
                 <AnimatePresence mode="wait">
                     {activeTab === "overview" && <OverviewTab products={localProducts} blogs={localBlogs} />}
                     {activeTab === "inventory" && (
@@ -277,11 +277,11 @@ export default function AdminPanel() {
 const SidebarLink = ({ icon, label, active, onClick }: { icon: any, label: string, active: boolean, onClick: () => void }) => (
     <button
         onClick={onClick}
-        className={`flex items-center gap-5 p-5 md:px-8 md:py-5 rounded-3xl transition-all relative group ${active ? 'bg-primary text-black shadow-[0_10px_30px_rgba(19,236,55,0.2)] scale-105' : 'text-white/40 hover:bg-white/5 hover:text-white'}`}
+        className={`flex flex-col md:flex-row items-center gap-2 md:gap-5 p-3 md:px-8 md:py-5 rounded-2xl md:rounded-3xl transition-all relative group flex-1 md:flex-none ${active ? 'bg-primary text-black shadow-[0_10px_30px_rgba(19,236,55,0.2)] scale-105' : 'text-white/40 hover:bg-white/5 hover:text-white'}`}
     >
         {icon}
-        <span className="hidden md:inline font-black uppercase tracking-[0.2em] text-[11px]">{label}</span>
-        {active && <motion.div layoutId="activeInd" className="absolute -left-2 w-1.5 h-8 bg-primary rounded-full hidden md:block" />}
+        <span className="text-[8px] md:text-[11px] font-black uppercase tracking-[0.2em]">{label}</span>
+        {active && <motion.div layoutId="activeInd" className="absolute -left-2 w-1.5 h-8 bg-primary rounded-full hidden lg:block" />}
     </button>
 );
 
@@ -302,7 +302,7 @@ const InventoryTab = ({ products, onEdit, onDelete, onAdd }: { products: Product
                     <div className="flex items-center gap-4 mb-4">
                         <div className="px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded-full uppercase tracking-widest border border-primary/20">Production Hub</div>
                     </div>
-                    <h2 className="text-6xl md:text-9xl font-black tracking-tighter uppercase leading-[0.8]">GEAR<br /><span className="text-primary italic">VAULT</span></h2>
+                    <h2 className="text-4xl md:text-6xl lg:text-9xl font-black tracking-tighter uppercase leading-[0.8]">GEAR<br /><span className="text-primary italic">VAULT</span></h2>
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center gap-6">
@@ -393,7 +393,7 @@ const BlogVaultTab = ({ blogs, onEdit, onDelete, onAdd }: { blogs: BlogPost[], o
                     <div className="flex items-center gap-4 mb-4">
                         <div className="px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded-full uppercase tracking-widest border border-primary/20">SEO Knowledge</div>
                     </div>
-                    <h2 className="text-6xl md:text-9xl font-black tracking-tighter uppercase leading-[0.8]">KNOWLEDGE<br /><span className="text-primary italic">VAULT</span></h2>
+                    <h2 className="text-4xl md:text-6xl lg:text-9xl font-black tracking-tighter uppercase leading-[0.8]">KNOWLEDGE<br /><span className="text-primary italic">VAULT</span></h2>
                 </div>
                 <button onClick={onAdd} className="w-full sm:w-auto bg-primary text-black font-black px-12 py-5 rounded-3xl flex items-center justify-center gap-4 text-xs uppercase tracking-widest hover:bg-white hover:-translate-y-1 transition-all shadow-2xl">
                     <Plus /> Write Protocol
@@ -458,7 +458,7 @@ const ProductPowerEditor = ({ product, onClose, onSave }: { product: Product, on
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "spring", damping: 25, stiffness: 120 }}
-                className="w-full max-w-6xl h-full bg-background-dark border-l border-white/10 p-10 md:p-20 overflow-y-auto relative rounded-l-[4rem] shadow-[-100px_0_100px_rgba(0,0,0,0.5)]"
+                className="w-full max-w-6xl h-full bg-background-dark border-l border-white/10 p-6 md:p-10 lg:p-20 overflow-y-auto relative rounded-t-[3rem] md:rounded-t-0 md:rounded-l-[4rem] shadow-[-100px_0_100px_rgba(0,0,0,0.5)]"
             >
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-20">
                     <div>
@@ -468,7 +468,7 @@ const ProductPowerEditor = ({ product, onClose, onSave }: { product: Product, on
                         </div>
                         <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-none">GEAR <span className="text-primary italic">OS</span></h2>
                     </div>
-                    <button onClick={onClose} className="p-8 bg-white/5 rounded-full hover:bg-white/10 hover:rotate-90 transition-all self-end"><CloseIcon size={32} /></button>
+                    <button onClick={onClose} className="p-4 md:p-8 bg-white/5 rounded-full hover:bg-white/10 hover:rotate-90 transition-all self-end md:self-auto"><CloseIcon size={24} className="md:w-8 md:h-8" /></button>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
@@ -478,21 +478,21 @@ const ProductPowerEditor = ({ product, onClose, onSave }: { product: Product, on
                                 type="text"
                                 value={formData.name}
                                 onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-[2rem] p-8 text-3xl font-black text-white focus:outline-none focus:border-primary transition-all tracking-tighter"
+                                className="w-full bg-white/5 border border-white/10 rounded-2xl md:rounded-[2rem] p-5 md:p-8 text-xl md:text-3xl font-black text-white focus:outline-none focus:border-primary transition-all tracking-tighter"
                             />
                         </EditorField>
 
-                        <div className="grid grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                             <EditorField label="Valuation">
                                 <input
-                                    className="w-full bg-white/5 border border-white/10 rounded-[2rem] p-8 text-2xl font-bold text-primary focus:outline-none"
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl md:rounded-[2rem] p-5 md:p-8 text-lg md:text-2xl font-bold text-primary focus:outline-none"
                                     value={formData.price}
                                     onChange={e => setFormData({ ...formData, price: e.target.value })}
                                 />
                             </EditorField>
                             <EditorField label="Classification">
                                 <select
-                                    className="w-full bg-white/5 border border-white/10 rounded-[2rem] p-8 text-xl font-bold uppercase tracking-widest appearance-none outline-none focus:border-primary"
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl md:rounded-[2rem] p-5 md:p-8 text-base md:text-xl font-bold uppercase tracking-widest appearance-none outline-none focus:border-primary"
                                     value={formData.categorySlug}
                                     onChange={e => setFormData({ ...formData, categorySlug: e.target.value, category: e.target.value.toUpperCase() })}
                                 >
@@ -649,11 +649,11 @@ const OverviewTab = ({ products, blogs }: { products: Product[], blogs: BlogPost
             </div>
             <h2 className="text-6xl md:text-9xl font-black tracking-tighter uppercase leading-[0.8] mb-12">SYSTEM<br /><span className="text-primary italic">CORE</span></h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <OverviewStat label="Health Status" value="Online" trend="Stable" icon={<Activity />} />
-                <OverviewStat label="Inventory" value={products.length.toString()} trend="Indexed" icon={<Package />} />
-                <OverviewStat label="Articles" value={blogs.length.toString()} trend="Live" icon={<FileText />} />
-                <OverviewStat label="Uptime" value="99.9%" trend="Elite" icon={<Clock />} />
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+                <OverviewStat label="Health Status" value="Online" trend="Stable" icon={<Activity className="w-4 h-4 md:w-6 md:h-6" />} />
+                <OverviewStat label="Inventory" value={products.length.toString()} trend="Indexed" icon={<Package className="w-4 h-4 md:w-6 md:h-6" />} />
+                <OverviewStat label="Articles" value={blogs.length.toString()} trend="Live" icon={<FileText className="w-4 h-4 md:w-6 md:h-6" />} />
+                <OverviewStat label="Uptime" value="99.9%" trend="Elite" icon={<Clock className="w-4 h-4 md:w-6 md:h-6" />} />
             </div>
         </header>
 
@@ -694,15 +694,15 @@ const HealthBar = ({ label, value }: { label: string, value: number }) => (
 );
 
 const OverviewStat = ({ label, value, trend, icon }: { label: string, value: string, trend: string, icon: any }) => (
-    <div className="glass-dark p-10 rounded-[3rem] border-white/5 hover:border-primary/30 transition-all group">
-        <div className="flex items-center justify-between mb-8">
-            <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-black transition-all">
+    <div className="glass-dark p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] border-white/5 hover:border-primary/30 transition-all group">
+        <div className="flex items-center justify-between mb-6 md:mb-8">
+            <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-white/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-black transition-all">
                 {icon}
             </div>
-            <span className="text-[9px] font-bold text-primary uppercase tracking-[0.3em]">{trend}</span>
+            <span className="text-[8px] md:text-[9px] font-bold text-primary uppercase tracking-[0.3em]">{trend}</span>
         </div>
-        <p className="text-[9px] uppercase tracking-widest text-white/30 mb-2 font-bold">{label}</p>
-        <p className="text-4xl font-black tracking-tighter">{value}</p>
+        <p className="text-[8px] md:text-[9px] uppercase tracking-widest text-white/30 mb-1 md:mb-2 font-bold">{label}</p>
+        <p className="text-2xl md:text-4xl font-black tracking-tighter">{value}</p>
     </div>
 );
 
