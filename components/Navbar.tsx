@@ -37,7 +37,7 @@ export function Navbar() {
                         <Link href="/shop?cat=strength" className="hover:text-primary hover:tracking-[0.3em] transition-all duration-300">Strength</Link>
                         <Link href="/shop?cat=cardio" className="hover:text-primary hover:tracking-[0.3em] transition-all duration-300">Cardio</Link>
                         <Link href="/shop" className="hover:text-primary hover:tracking-[0.3em] transition-all duration-300">Catalogue</Link>
-                        <Link href="/blog" className="hover:text-primary hover:tracking-[0.3em] transition-all duration-300">Insights</Link>
+                        <Link href="/blog" className="hover:text-primary hover:tracking-[0.3em] transition-all duration-300">Blogs</Link>
                         <Link href="/#community" className="hover:text-primary hover:tracking-[0.3em] transition-all duration-300">Community</Link>
                     </div>
                 </div>
@@ -83,7 +83,7 @@ export function Navbar() {
                             <Link onClick={() => setIsOpen(false)} href="/shop?cat=strength" className="text-sm font-bold uppercase tracking-[0.3em] text-white/70 hover:text-primary">Strength</Link>
                             <Link onClick={() => setIsOpen(false)} href="/shop?cat=cardio" className="text-sm font-bold uppercase tracking-[0.3em] text-white/70 hover:text-primary">Cardio</Link>
                             <Link onClick={() => setIsOpen(false)} href="/shop" className="text-sm font-bold uppercase tracking-[0.3em] text-white/70 hover:text-primary">Catalogue</Link>
-                            <Link onClick={() => setIsOpen(false)} href="/blog" className="text-sm font-bold uppercase tracking-[0.3em] text-white/70 hover:text-primary">Insights</Link>
+                            <Link onClick={() => setIsOpen(false)} href="/blog" className="text-sm font-bold uppercase tracking-[0.3em] text-white/70 hover:text-primary">Blogs</Link>
                             <Link onClick={() => setIsOpen(false)} href="/#community" className="text-sm font-bold uppercase tracking-[0.3em] text-white/70 hover:text-primary">Community</Link>
                             <Link
                                 onClick={() => setIsOpen(false)}

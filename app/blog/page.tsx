@@ -40,7 +40,7 @@ export default function BlogPage() {
                             transition={{ delay: 0.1 }}
                             className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-[0.8] mb-8 dark:text-white"
                         >
-                            INSIGHTS & <br /><span className="text-primary italic">PERFORMANCE</span>
+                            BLOGS & <br /><span className="text-primary italic">PERFORMANCE</span>
                         </motion.h1>
                         <motion.p
                             initial={{ opacity: 0 }}

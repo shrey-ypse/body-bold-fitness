@@ -23,7 +23,7 @@ export const BlogPreview = () => {
                             Knowledge is Power
                         </motion.span>
                         <h2 className="text-4xl md:text-8xl font-black tracking-tighter uppercase leading-[0.8] dark:text-white">
-                            LATEST <br /><span className="text-neutral-dark/20 dark:text-white/20">INSIGHTS</span>
+                            LATEST <br /><span className="text-neutral-dark/20 dark:text-white/20">BLOGS</span>
                         </h2>
                     </div>
                     <Link

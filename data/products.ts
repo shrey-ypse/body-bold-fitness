@@ -247,7 +247,7 @@ export const BUSINESS_DETAILS = {
     name: "Body Bold Fitness Store",
     whatsappNumber: "919392488297",
     address: "6-22/2, 1st floor Sai Nagar colony, beside A1 Bawarchi, Near HS Dhargha Bus Stop, Shaikpet, Hyderabad, Telangana 500104",
-    email: "contact@bodyboldfitness.store",
+    email: "bodybolt2020@gmail.com",
 };
 
 export function getWhatsAppUrl(productName: string) {

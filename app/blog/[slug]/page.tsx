@@ -32,7 +32,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
             <div className="min-h-screen bg-background-dark flex items-center justify-center p-6 font-lexend">
                 <div className="text-center">
                     <h1 className="text-4xl font-bold text-white mb-6 uppercase tracking-tighter">Article Not Found</h1>
-                    <Link href="/blog" className="text-primary hover:underline font-bold uppercase tracking-widest text-xs">Return to insights</Link>
+                    <Link href="/blog" className="text-primary hover:underline font-bold uppercase tracking-widest text-xs">Return to blogs</Link>
                 </div>
             </div>
         );
@@ -50,7 +50,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
                         className="mb-12"
                     >
                         <Link href="/blog" className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-white/40 hover:text-primary transition-colors">
-                            <ChevronLeft size={16} /> Back to Insights
+                            <ChevronLeft size={16} /> Back to Blogs
                         </Link>
                     </motion.div>
 

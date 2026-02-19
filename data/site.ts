@@ -35,8 +35,8 @@ export const TESTIMONIALS = [
 
 export const TRUST_FEATURES = [
     {
-        title: "Direct Dealer",
-        description: "Authorized dealer for Aerofit and top international brands.",
+        title: "Retail Excellence",
+        description: "Premium fitness equipment showroom located in Shaikpet, Hyderabad.",
         icon: "ShieldCheck"
     },
     {
