@@ -168,10 +168,20 @@ export default function AdminPanel() {
                     <span className="text-3xl font-black tracking-tighter uppercase whitespace-nowrap">BODY <span className="text-primary">BOLD</span> FITNESS</span>
                 </div>
 
-                <div className="flex flex-row md:flex-col space-x-2 md:space-x-0 md:space-y-4 w-full md:w-auto">
+                <div className="flex flex-row md:flex-col space-x-2 md:space-x-0 md:space-y-4 w-full md:w-auto items-center">
                     <SidebarLink icon={<LayoutDashboard size={20} className="lg:w-5.5 lg:h-5.5" />} label="Home" active={activeTab === "overview"} onClick={() => setActiveTab("overview")} />
                     <SidebarLink icon={<Package size={20} className="lg:w-5.5 lg:h-5.5" />} label="Gear" active={activeTab === "inventory"} onClick={() => setActiveTab("inventory")} />
                     <SidebarLink icon={<BookOpen size={20} className="lg:w-5.5 lg:h-5.5" />} label="Vault" active={activeTab === "blog"} onClick={() => setActiveTab("blog")} />
+                    <button
+                        onClick={() => {
+                            setIsAuthenticated(false);
+                            addNotification("Logged out successfully.", "success");
+                        }}
+                        className="md:hidden flex flex-col items-center gap-2 p-3 rounded-2xl text-red-500/60 hover:text-red-500 flex-1"
+                    >
+                        <CloseIcon size={20} />
+                        <span className="text-[8px] font-black uppercase tracking-[0.2em]">Exit</span>
+                    </button>
                 </div>
 
                 <div className="mt-auto hidden md:flex flex-col space-y-6">
