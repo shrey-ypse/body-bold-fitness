@@ -585,47 +585,53 @@ const BlogPowerEditor = ({ blog, onClose, onSave }: { blog: BlogPost, onClose: (
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "spring", damping: 25, stiffness: 120 }}
-                className="w-full max-w-6xl h-full bg-background-dark border-l border-white/10 p-10 md:p-20 overflow-y-auto relative rounded-l-[4rem]"
+                className="w-full max-w-6xl h-full bg-background-dark border-l border-white/10 p-6 md:p-10 lg:p-20 overflow-y-auto relative rounded-t-[3rem] md:rounded-t-0 md:rounded-l-[4rem] shadow-[-100px_0_100px_rgba(0,0,0,0.5)]"
             >
-                <div className="flex justify-between items-center mb-20">
-                    <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-none">SCRIPT <span className="text-primary italic">OS</span></h2>
-                    <button onClick={onClose} className="p-8 bg-white/5 rounded-full hover:bg-white/10 transition-all"><CloseIcon size={32} /></button>
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-20">
+                    <div>
+                        <div className="flex items-center gap-3 mb-4">
+                            <BookOpen className="text-primary w-5 h-5" />
+                            <span className="text-[10px] font-bold text-primary uppercase tracking-[0.5em]">Vault Editor v3.0</span>
+                        </div>
+                        <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-none">SCRIPT <span className="text-primary italic">OS</span></h2>
+                    </div>
+                    <button onClick={onClose} className="p-4 md:p-8 bg-white/5 rounded-full hover:bg-white/10 hover:rotate-90 transition-all self-end md:self-auto"><CloseIcon size={24} className="md:w-8 md:h-8" /></button>
                 </div>
 
                 <div className="space-y-12">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
                         <EditorField label="Article Title">
                             <input
-                                className="w-full bg-white/5 border border-white/10 rounded-3xl p-8 text-2xl font-bold"
+                                className="w-full bg-white/5 border border-white/10 rounded-2xl md:rounded-[2rem] p-5 md:p-8 text-xl md:text-3xl font-black text-white focus:outline-none focus:border-primary transition-all tracking-tighter"
                                 value={formData.title}
                                 onChange={e => setFormData({ ...formData, title: e.target.value })}
                             />
                         </EditorField>
                         <EditorField label="URL Slug">
                             <input
-                                className="w-full bg-white/5 border border-white/10 rounded-3xl p-8 text-xl font-medium text-primary"
+                                className="w-full bg-white/5 border border-white/10 rounded-2xl md:rounded-[2rem] p-5 md:p-8 text-lg md:text-xl font-medium text-primary focus:outline-none focus:border-primary"
                                 value={formData.slug}
                                 onChange={e => setFormData({ ...formData, slug: e.target.value })}
                             />
                         </EditorField>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
                         <EditorField label="Category">
-                            <input className="w-full bg-white/5 border border-white/10 rounded-3xl p-8 font-bold" value={formData.category} onChange={e => setFormData({ ...formData, category: e.target.value })} />
+                            <input className="w-full bg-white/5 border border-white/10 rounded-2xl md:rounded-3xl p-5 md:p-8 font-bold focus:outline-none focus:border-primary" value={formData.category} onChange={e => setFormData({ ...formData, category: e.target.value })} />
                         </EditorField>
                         <EditorField label="Read Time">
-                            <input className="w-full bg-white/5 border border-white/10 rounded-3xl p-8 font-bold text-white/40" value={formData.readingTime} onChange={e => setFormData({ ...formData, readingTime: e.target.value })} />
+                            <input className="w-full bg-white/5 border border-white/10 rounded-2xl md:rounded-3xl p-5 md:p-8 font-bold text-white/40 focus:outline-none focus:border-primary" value={formData.readingTime} onChange={e => setFormData({ ...formData, readingTime: e.target.value })} />
                         </EditorField>
                         <EditorField label="Image URL">
-                            <input className="w-full bg-white/5 border border-white/10 rounded-3xl p-8 font-bold text-white/40" value={formData.image} onChange={e => setFormData({ ...formData, image: e.target.value })} />
+                            <input className="w-full bg-white/5 border border-white/10 rounded-2xl md:rounded-3xl p-5 md:p-8 font-bold text-white/40 focus:outline-none focus:border-primary" value={formData.image} onChange={e => setFormData({ ...formData, image: e.target.value })} />
                         </EditorField>
                     </div>
 
                     <EditorField label="Knowledge Protocol (Markdown)">
                         <textarea
                             rows={15}
-                            className="w-full bg-white/5 border border-white/10 rounded-3xl p-10 text-xl font-medium leading-relaxed"
+                            className="w-full bg-white/5 border border-white/10 rounded-2xl md:rounded-3xl p-6 md:p-10 text-base md:text-xl font-medium leading-relaxed focus:outline-none focus:border-primary/50"
                             value={formData.content}
                             onChange={e => setFormData({ ...formData, content: e.target.value })}
                         />
@@ -633,9 +639,9 @@ const BlogPowerEditor = ({ blog, onClose, onSave }: { blog: BlogPost, onClose: (
 
                     <button
                         onClick={() => onSave(formData)}
-                        className="w-full bg-primary text-black font-black uppercase tracking-[0.34em] py-10 rounded-3xl shadow-2xl hover:bg-white transition-all flex items-center justify-center gap-6"
+                        className="w-full bg-primary text-black font-black uppercase tracking-[0.34em] py-8 md:py-10 rounded-[2rem] md:rounded-3xl shadow-2xl hover:bg-white transition-all flex items-center justify-center gap-6"
                     >
-                        <Save size={24} /> <span className="text-xl">Secure Knowledge</span>
+                        <Save size={24} /> <span className="text-lg md:text-xl">Secure Knowledge</span>
                     </button>
                 </div>
             </motion.div>
