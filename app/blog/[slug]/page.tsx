@@ -122,7 +122,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
                                 <div>
                                     <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">Written By</p>
                                     <p className="text-xl font-bold uppercase tracking-tight">{post.author}</p>
-                                    <p className="text-[10px] uppercase tracking-widest text-primary font-bold">Body Bold Expert Panel</p>
+                                    <p className="text-[10px] uppercase tracking-widest text-primary font-bold">Body Bolt Expert Panel</p>
                                 </div>
                             </div>
 

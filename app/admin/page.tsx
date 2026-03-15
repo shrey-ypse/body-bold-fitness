@@ -165,7 +165,7 @@ export default function AdminPanel() {
                         <div className="w-2 h-2 bg-primary rounded-full animate-ping" />
                         <span className="text-[10px] font-bold text-primary uppercase tracking-[0.3em]">System Live</span>
                     </div>
-                    <span className="text-3xl font-black tracking-tighter uppercase whitespace-nowrap">BODY <span className="text-primary">BOLD</span> FITNESS</span>
+                    <span className="text-3xl font-black tracking-tighter uppercase whitespace-nowrap">BODY <span className="text-primary">BOLT</span> FITNESS</span>
                 </div>
 
                 <div className="flex flex-row md:flex-col space-x-2 md:space-x-0 md:space-y-4 w-full md:w-auto items-center">
@@ -247,7 +247,7 @@ export default function AdminPanel() {
                                     excerpt: "Brief summary of knowledge...",
                                     content: "# New Protocol\nStart writing here...",
                                     date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-                                    author: "Body Bold Expert",
+                                    author: "Body Bolt Expert",
                                     readingTime: "5 min read",
                                     category: "Training",
                                     image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80",

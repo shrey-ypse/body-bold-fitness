@@ -30,7 +30,7 @@ export function Navbar() {
                 <div className="flex items-center space-x-12">
                     <Link href="/" className="text-xl md:text-2xl font-bold tracking-tighter flex items-center group gap-2">
                         <span className="group-hover:text-primary transition-colors">BODY</span>
-                        <span className="text-primary group-hover:text-white transition-colors">BOLD</span>
+                        <span className="text-primary group-hover:text-white transition-colors">BOLT</span>
                         <span className="group-hover:text-primary transition-colors">FITNESS</span>
                     </Link>
                     <div className="hidden md:flex space-x-10 text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">

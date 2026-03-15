@@ -39,10 +39,10 @@ Hyderabad's power grid can be unpredictable. A spike can fry your treadmill's ci
 A tight belt ruins the rollers; a loose belt causes slipping.
 - **Action**: Ensure you can lift the belt 2-3 inches in the middle.
 
-Need professional help? Body Bold provides expert treadmill servicing across Hyderabad.
+Need professional help? Body Bolt provides expert treadmill servicing across Hyderabad.
         `,
         date: "Feb 18, 2026",
-        author: "Body Bold Expert",
+        author: "Body Bolt Expert",
         readingTime: "5 min read",
         category: "Maintenance",
         image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop",
@@ -89,7 +89,7 @@ Get a free consultation at our Shaikpet showroom to plan your space!
         content: `
 # Strength Training vs Cardio: What's Best for Fat Loss?
 
-Most of our customers at Body Bold Hyderabad ask: Should I buy a treadmill or a multi-gym?
+Most of our customers at Body Bolt Hyderabad ask: Should I buy a treadmill or a multi-gym?
 
 ## The Case for Cardio
 Cardio burns more calories *during* the workout. It's great for heart health and immediate calorie deficit.
@@ -97,13 +97,13 @@ Cardio burns more calories *during* the workout. It's great for heart health and
 ## The Case for Strength
 Strength training builds muscle, which increases your RMR (Resting Metabolic Rate). You burn calories while you sleep.
 
-## The Body Bold Verdict
+## The Body Bolt Verdict
 For maximum results, we recommend a 70/30 split. 70% Strength training to build shape and 30% Cardio for endurance and finishing fat.
 
 Visit our store to try out our Aerofit series and Pro Strength range today.
         `,
         date: "Feb 10, 2026",
-        author: "Body Bold Coach",
+        author: "Body Bolt Coach",
         readingTime: "6 min read",
         category: "Training",
         image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop",
@@ -121,7 +121,7 @@ Hyderabad's fitness culture is exploding. From Jubilee Hills to Shaikpet, everyo
 
 ## 1. Why Buying Locally Matters
 Buying gym equipment isn't like buying a t-shirt. These are heavy, mechanical systems. If your treadmill motor has an issue, you cannot ship it back to Mumbai.
-- **Body Bold Advantage**: We provide on-site service across Hyderabad and Secunderabad within 24-48 hours.
+- **Body Bolt Advantage**: We provide on-site service across Hyderabad and Secunderabad within 24-48 hours.
 
 ## 2. Aerofit: The Gold Standard in Telangana
 In Hyderabad, Aerofit has become the trusted name for cardio. Whether it's the AC motor series or the home-use DC treadmills, knowing your local authorized dealer ensures you get genuine spares.
@@ -141,7 +141,7 @@ Don't be fooled by cheap prices online.
 - **Dumbbells**: ₹100 - ₹250 per KG
 - **Multi-Gyms**: ₹35k - ₹90k
 
-Ready to build your dream gym? Visit the Body Bold Fitness showroom in Shaikpet today for a live demo!
+Ready to build your dream gym? Visit the Body Bolt Fitness showroom in Shaikpet today for a live demo!
         `,
         date: "Feb 18, 2026",
         author: "Management Team",

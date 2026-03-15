@@ -11,7 +11,7 @@ export const Footer = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 mb-16 md:mb-24">
                     <div className="text-center lg:text-left">
                         <Link href="/" className="text-2xl md:text-3xl font-bold tracking-tighter mb-6 md:mb-10 block">
-                            BODY <span className="text-primary">BOLD</span> FITNESS
+                            BODY <span className="text-primary">BOLT</span> FITNESS
                         </Link>
                         <p className="text-base md:text-xl text-white/50 leading-relaxed max-w-md mx-auto lg:mx-0 mb-8 md:mb-12">
                             The premier source for high-performance fitness equipment in Hyderabad. <span className="text-white/80">Authorized Aerofit Dealer</span> engineering strength since 2026.

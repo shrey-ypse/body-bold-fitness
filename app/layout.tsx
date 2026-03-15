@@ -10,16 +10,16 @@ const lexend = Lexend({
 });
 
 export const metadata: Metadata = {
-  title: "Body Bold Fitness | Premium Performance Equipment Hyderabad",
+  title: "Body Bolt Fitness | Premium Performance Equipment Hyderabad",
   description: "Professional grade Aerofit fitness equipment in Hyderabad. Shop our curated collection of strength and performance gear. Authorized dealer for the best gym equipment in Telangana.",
-  keywords: ["fitness", "gym equipment hyderabad", "aerofit treadmill", "bodybold", "strength training hyderabad", "gym repair services"],
-  authors: [{ name: "Body Bold Fitness" }],
+  keywords: ["fitness", "gym equipment hyderabad", "aerofit treadmill", "bodybolt", "strength training hyderabad", "gym repair services"],
+  authors: [{ name: "Body Bolt Fitness" }],
   openGraph: {
-    title: "Body Bold Fitness",
+    title: "Body Bolt Fitness",
     description: "Premium Performance Equipment in Hyderabad",
     type: "website",
     url: "https://bodyboldfitness.store",
-    siteName: "Body Bold Fitness",
+    siteName: "Body Bolt Fitness",
   },
   alternates: {
     canonical: "https://bodyboldfitness.store",
