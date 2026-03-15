@@ -76,7 +76,7 @@ export default function AdminPanel() {
 
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
-        if (password === "admin123") {
+        if (password === "bodybolt2020") {
             setIsAuthenticated(true);
             addNotification("Access Granted. Welcome back, Admin.", "success");
         } else {
