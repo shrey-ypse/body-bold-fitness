@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://bodyboldfitness.store/sitemap.xml
+Sitemap: https://bodyboltfitness.store/sitemap.xml

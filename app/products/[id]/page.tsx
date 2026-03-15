@@ -15,7 +15,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        const savedData = localStorage.getItem("bbf_vault_data");
+        const savedData = localStorage.getItem("bolt_vault_data");
         if (savedData) {
             setAllProducts(JSON.parse(savedData));
         }

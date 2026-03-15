@@ -12,7 +12,7 @@ export default function BlogPage() {
     const [posts, setPosts] = useState<BlogPost[]>([]);
 
     useEffect(() => {
-        const savedData = localStorage.getItem("bbf_blog_data");
+        const savedData = localStorage.getItem("bolt_blog_data");
         if (savedData) {
             setPosts(JSON.parse(savedData));
         } else {

@@ -17,7 +17,7 @@ function ShopContent() {
     const categories = ["all", "strength", "cardio", "services"];
 
     useEffect(() => {
-        const savedData = localStorage.getItem("bbf_vault_data");
+        const savedData = localStorage.getItem("bolt_vault_data");
         if (savedData) {
             setLocalProducts(JSON.parse(savedData));
         }

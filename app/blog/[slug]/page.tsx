@@ -14,7 +14,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        const savedData = localStorage.getItem("bbf_blog_data");
+        const savedData = localStorage.getItem("bolt_blog_data");
         if (savedData) {
             setAllPosts(JSON.parse(savedData));
         } else {

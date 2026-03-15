@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     title: "Body Bolt Fitness",
     description: "Premium Performance Equipment in Hyderabad",
     type: "website",
-    url: "https://bodyboldfitness.store",
+    url: "https://bodyboltfitness.store",
     siteName: "Body Bolt Fitness",
   },
   alternates: {
-    canonical: "https://bodyboldfitness.store",
+    canonical: "https://bodyboltfitness.store",
   },
 };
 
@@ -42,9 +42,9 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "SportsStore",
     "name": BUSINESS_DETAILS.name,
-    "image": "https://bodyboldfitness.store/logo-full.png",
-    "@id": "https://bodyboldfitness.store",
-    "url": "https://bodyboldfitness.store",
+    "image": "https://bodyboltfitness.store/logo-full.png",
+    "@id": "https://bodyboltfitness.store",
+    "url": "https://bodyboltfitness.store",
     "telephone": BUSINESS_DETAILS.whatsappNumber,
     "address": {
       "@type": "PostalAddress",

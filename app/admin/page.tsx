@@ -54,8 +54,8 @@ export default function AdminPanel() {
 
     // Load from LocalStorage on mount
     useEffect(() => {
-        const savedProducts = localStorage.getItem("bbf_vault_data");
-        const savedBlogs = localStorage.getItem("bbf_blog_data");
+        const savedProducts = localStorage.getItem("bolt_vault_data");
+        const savedBlogs = localStorage.getItem("bolt_blog_data");
 
         if (savedProducts) setLocalProducts(JSON.parse(savedProducts));
         else setLocalProducts(PRODUCTS);
@@ -66,12 +66,12 @@ export default function AdminPanel() {
 
     const syncProducts = (updatedList: Product[]) => {
         setLocalProducts(updatedList);
-        localStorage.setItem("bbf_vault_data", JSON.stringify(updatedList));
+        localStorage.setItem("bolt_vault_data", JSON.stringify(updatedList));
     };
 
     const syncBlogs = (updatedList: BlogPost[]) => {
         setLocalBlogs(updatedList);
-        localStorage.setItem("bbf_blog_data", JSON.stringify(updatedList));
+        localStorage.setItem("bolt_blog_data", JSON.stringify(updatedList));
     };
 
     const handleLogin = (e: React.FormEvent) => {
