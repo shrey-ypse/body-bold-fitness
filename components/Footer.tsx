@@ -58,7 +58,7 @@ export const Footer = () => {
                             }
                         }}
                     >
-                        © 2026 B B F STORE. All rights reserved.
+                        © 2026 BODY BOLT FITNESS. All rights reserved.
                     </p>
                     <div className="flex space-x-8 md:space-x-12 text-[9px] md:text-[10px] uppercase tracking-widest text-white/30">
                         <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>

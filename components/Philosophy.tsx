@@ -22,7 +22,7 @@ export const Philosophy = () => {
                         </h2>
                         <div className="space-y-6 md:space-y-8 text-base md:text-lg text-neutral-dark/70 dark:text-white/60 leading-relaxed max-w-lg mx-auto lg:mx-0">
                             <p>
-                                At B B F STORE, we believe fitness equipment should be as resilient as the athletes who use it. Every piece in our collection is hand-selected for its structural integrity, ergonomic precision, and long-term durability.
+                                At Body Bolt Fitness, we believe fitness equipment should be as resilient as the athletes who use it. Every piece in our collection is hand-selected for its structural integrity, ergonomic precision, and long-term durability.
                             </p>
                             <p>
                                 We don't just sell machines; we provide the foundation for your physical evolution. Whether you are building a professional gym or a personal sanctuary, our gear is engineered to handle the most intensive training loads.

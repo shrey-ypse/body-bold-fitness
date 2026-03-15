@@ -127,7 +127,7 @@ export default function AdminPanel() {
                             <Settings className="text-primary w-10 h-10" />
                         </div>
                         <h1 className="text-4xl font-bold text-white tracking-tighter uppercase mb-2">OS<span className="text-primary">X</span> ADMIN</h1>
-                        <p className="text-white/30 text-[10px] uppercase tracking-[0.4em] font-medium">B B F Store Operations</p>
+                        <p className="text-white/30 text-[10px] uppercase tracking-[0.4em] font-medium">Body Bolt Operations</p>
                     </div>
 
                     <form onSubmit={handleLogin} className="space-y-6">
