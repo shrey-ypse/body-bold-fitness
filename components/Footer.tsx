@@ -50,16 +50,15 @@ export const Footer = () => {
                 </div>
 
                 <div className="pt-12 md:pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
-                    <p
-                        className="text-[9px] md:text-[10px] uppercase tracking-widest text-white/30 text-center md:text-left cursor-default select-none"
-                        onClick={(e) => {
-                            if (e.detail === 3) {
-                                window.location.href = '/admin';
-                            }
-                        }}
-                    >
-                        © 2026 BODY BOLT FITNESS. All rights reserved.
-                    </p>
+                    <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-[9px] md:text-[10px] uppercase tracking-widest text-white/30">
+                        <p>
+                            © 2026 BODY BOLT FITNESS. All rights reserved.
+                        </p>
+                        <span className="hidden md:inline opacity-20">|</span>
+                        <p className="flex items-center gap-2">
+                            Strategy & Development by <a href="https://webbaordin.com" target="_blank" className="text-primary hover:text-white transition-colors font-black">WEBBAORDIN</a>
+                        </p>
+                    </div>
                     <div className="flex space-x-8 md:space-x-12 text-[9px] md:text-[10px] uppercase tracking-widest text-white/30">
                         <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
                         <a href="#" className="hover:text-white transition-colors">Terms of Service</a>

@@ -31,6 +31,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { PRODUCTS, Product } from "@/data/products";
 import { BLOG_POSTS, BlogPost } from "@/data/blog";
+import { verifyAdminPassword } from "@/lib/actions";
 
 type Tab = "overview" | "inventory" | "blog";
 
@@ -74,9 +75,10 @@ export default function AdminPanel() {
         localStorage.setItem("bolt_blog_data", JSON.stringify(updatedList));
     };
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (password === "bodybolt2020") {
+        const isValid = await verifyAdminPassword(password);
+        if (isValid) {
             setIsAuthenticated(true);
             addNotification("Access Granted. Welcome back, Admin.", "success");
         } else {
