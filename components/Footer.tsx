@@ -51,7 +51,14 @@ export const Footer = () => {
 
                 <div className="pt-12 md:pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
                     <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-[9px] md:text-[10px] uppercase tracking-widest text-white/30">
-                        <p>
+                        <p 
+                            className="text-[9px] md:text-[10px] uppercase tracking-widest text-white/30 cursor-default select-none"
+                            onClick={(e) => {
+                                if (e.detail === 3) {
+                                    window.location.href = '/admin';
+                                }
+                            }}
+                        >
                             © 2026 BODY BOLT FITNESS. All rights reserved.
                         </p>
                         <span className="hidden md:inline opacity-20">|</span>
