@@ -8,9 +8,10 @@ export async function verifyAdminPassword(password: string): Promise<boolean> {
   const adminSecret = process.env.ADMIN_PASSWORD;
   
   if (!adminSecret) {
-    console.error("ADMIN_PASSWORD is not set in environment variables.");
+    console.warn("ADMIN_PASSWORD environment variable is missing.");
     return false;
   }
   
-  return password === adminSecret;
+  // Trim spaces to prevent mobile keyboard input issues
+  return password.trim() === adminSecret.trim();
 }
