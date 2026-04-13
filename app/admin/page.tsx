@@ -56,18 +56,39 @@ export default function AdminPanel() {
     // Load from Supabase on mount
     useEffect(() => {
         const loadData = async () => {
-            const [products, blogs] = await Promise.all([
-                getProducts(),
-                getBlogs()
-            ]);
+            try {
+                const [products, blogs] = await Promise.all([
+                    getProducts(),
+                    getBlogs()
+                ]);
 
-            // Fallback to static data if DB is empty but connected
-            setLocalProducts(products.length > 0 ? products : PRODUCTS);
-            setLocalBlogs(blogs.length > 0 ? blogs : BLOG_POSTS);
+                // Merge: Supabase data + any static products that aren't in the DB yet
+                const mergedProducts = [...products];
+                PRODUCTS.forEach(p => {
+                    if (!mergedProducts.find(mp => mp.id === p.id)) {
+                        mergedProducts.push(p);
+                    }
+                });
+
+                const mergedBlogs = [...blogs];
+                BLOG_POSTS.forEach(b => {
+                    if (!mergedBlogs.find(mb => mb.id === b.id)) {
+                        mergedBlogs.push(b);
+                    }
+                });
+
+                setLocalProducts(mergedProducts);
+                setLocalBlogs(mergedBlogs);
+            } catch (err) {
+                console.error("Data load failure:", err);
+                setLocalProducts(PRODUCTS);
+                setLocalBlogs(BLOG_POSTS);
+            }
         };
         
         loadData();
     }, []);
+
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
