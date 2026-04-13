@@ -21,10 +21,19 @@ function ShopContent() {
     useEffect(() => {
         const loadProducts = async () => {
             const data = await getProducts();
-            const initialProducts = await import("@/data/products").then(m => m.PRODUCTS);
-            setLocalProducts(data.length > 0 ? data : initialProducts);
+            
+            // Merge: Supabase data + any static products that aren't in the DB yet
+            const merged = [...data];
+            PRODUCTS.forEach(p => {
+                if (!merged.find(mp => mp.id === p.id)) {
+                    merged.push(p);
+                }
+            });
+            
+            setLocalProducts(merged);
         };
         loadProducts();
+
 
         const cat = searchParams.get("cat");
         if (cat && categories.includes(cat)) {

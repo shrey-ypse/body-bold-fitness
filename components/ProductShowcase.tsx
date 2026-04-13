@@ -14,12 +14,22 @@ export const ProductShowcase = () => {
     useEffect(() => {
         const loadProducts = async () => {
             const data = await getProducts();
-            // Use static fallback if DB is empty
+            
+            // Merge: Supabase data + any static products that aren't in the DB yet
+            const merged = [...data];
             const initialProducts = await import("@/data/products").then(m => m.PRODUCTS);
-            setProducts(data.length > 0 ? data : initialProducts);
+            
+            initialProducts.forEach(p => {
+                if (!merged.find(mp => mp.id === p.id)) {
+                    merged.push(p);
+                }
+            });
+            
+            setProducts(merged);
         };
         loadProducts();
     }, []);
+
 
     const scroll = (direction: "left" | "right") => {
         if (scrollRef.current) {

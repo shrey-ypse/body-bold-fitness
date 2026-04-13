@@ -15,11 +15,22 @@ export const BlogPreview = () => {
     useEffect(() => {
         const loadBlogs = async () => {
             const data = await getBlogs();
+            
+            // Merge: Supabase data + any static blogs that aren't in the DB yet
+            const merged = [...data];
             const initialBlogs = await import("@/data/blog").then(m => m.BLOG_POSTS);
-            setBlogs(data.length > 0 ? data : initialBlogs);
+            
+            initialBlogs.forEach(b => {
+                if (!merged.find(mb => mb.id === b.id)) {
+                    merged.push(b);
+                }
+            });
+            
+            setBlogs(merged);
         };
         loadBlogs();
     }, []);
+
 
     // Show latest 3 posts
     const featuredPosts = blogs.slice(0, 3);
