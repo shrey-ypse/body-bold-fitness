@@ -286,6 +286,7 @@ export default function AdminPanel() {
                         product={editingProduct}
                         onClose={() => setEditingProduct(null)}
                         onSave={handleSaveProduct}
+                        addNotification={addNotification}
                     />
                 )}
                 {editingBlog && (
@@ -296,6 +297,7 @@ export default function AdminPanel() {
                     />
                 )}
             </AnimatePresence>
+
 
             <NotificationCenter notifications={notifications} />
         </div>
@@ -456,8 +458,19 @@ const BlogVaultTab = ({ blogs, onEdit, onDelete, onAdd }: { blogs: BlogPost[], o
     );
 };
 
-const ProductPowerEditor = ({ product, onClose, onSave }: { product: Product, onClose: () => void, onSave: (p: Product) => void }) => {
+const ProductPowerEditor = ({ 
+    product, 
+    onClose, 
+    onSave, 
+    addNotification 
+}: { 
+    product: Product, 
+    onClose: () => void, 
+    onSave: (p: Product) => void,
+    addNotification: (text: string, type?: 'success' | 'error') => void
+}) => {
     const [formData, setFormData] = useState<Product>(product);
+
     const [uploading, setUploading] = useState(false);
     const fileRef = useRef<HTMLInputElement>(null);
 
@@ -467,24 +480,36 @@ const ProductPowerEditor = ({ product, onClose, onSave }: { product: Product, on
         setUploading(true);
         
         try {
-            // Read as data URL for immediate local preview
-            const reader = new FileReader();
-            reader.onloadend = async () => {
-                const base64 = reader.result as string;
-                // Upload to Supabase Storage
-                const publicUrl = await uploadImage(base64, file.name);
-                
-                if (publicUrl) {
-                    setFormData({ ...formData, images: [...formData.images, publicUrl], image: publicUrl });
-                }
-                setUploading(false);
-            };
-            reader.readAsDataURL(file);
+            // Convert to base64 using a Promise for reliability
+            const base64 = await new Promise<string>((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result as string);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+
+            // Upload to Supabase Storage via Server Action
+            const publicUrl = await uploadImage(base64, file.name);
+            
+            if (publicUrl) {
+                setFormData(prev => ({ 
+                    ...prev, 
+                    images: [...prev.images, publicUrl], 
+                    image: publicUrl 
+                }));
+                addNotification("Visual asset synced to cloud.", "success");
+            } else {
+                addNotification("Upload failed. Verify 'assets' bucket exists.", "error");
+            }
         } catch (error) {
             console.error("Upload failed", error);
+            addNotification("Critical upload failure.", "error");
+        } finally {
             setUploading(false);
+            if (fileRef.current) fileRef.current.value = ""; // Reset input
         }
     };
+
 
     return (
         <motion.div
