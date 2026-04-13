@@ -252,22 +252,36 @@ export async function uploadImage(file: File | string, fileName: string): Promis
 
     // If string, assume it's base64 and convert
     let body: any = file;
+    let contentType = 'image/png'; // default
+
     if (typeof file === 'string' && file.startsWith('data:')) {
+      const match = file.match(/^data:(image\/\w+);base64,/);
+      if (match) {
+        contentType = match[1];
+      }
       const base64Data = file.split(',')[1];
       const binaryData = Buffer.from(base64Data, 'base64');
       body = binaryData;
+    } else if (file instanceof File) {
+      contentType = file.type;
     }
+
+    // Sanitize filename: remove special chars and spaces
+    const cleanFileName = fileName.replace(/[^a-zA-Z0-9.-]/g, '_');
+    const path = `uploads/${Date.now()}-${cleanFileName}`;
+
+    console.log(`Attempting upload to bucket 'assets' at path: ${path}`);
 
     const { data, error } = await supabase.storage
       .from('assets')
-      .upload(`uploads/${Date.now()}-${fileName}`, body, {
+      .upload(path, body, {
         cacheControl: '3600',
         upsert: false,
-        contentType: typeof file === 'string' ? 'image/png' : (file as any).type || 'image/png'
+        contentType: contentType
       });
 
     if (error) {
-      console.error('Upload error in Storage:', error);
+      console.error('Supabase Storage Upload Error:', error.message, error);
       return null;
     }
 
@@ -275,11 +289,13 @@ export async function uploadImage(file: File | string, fileName: string): Promis
       .from('assets')
       .getPublicUrl(data.path);
 
+    console.log('Upload successful. Public URL:', publicUrl);
     return publicUrl;
   } catch (e) {
     console.error('uploadImage exception:', e);
     return null;
   }
 }
+
 
 
