@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export const Philosophy = () => {
     return (
-        <section className="py-24 md:py-32 bg-background-light dark:bg-background-dark relative overflow-hidden">
+        <section className="py-24 md:py-32 bg-background-dark relative overflow-hidden">
             <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/5 -skew-x-12 transform translate-x-1/2 hidden lg:block" />
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -51,6 +51,7 @@ export const Philosophy = () => {
                             src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop"
                             alt="Brand Philosophy"
                             className="w-full h-full object-cover grayscale md:hover:grayscale-0 transition-all duration-1000"
+                            loading="lazy"
                         />
                         <div className="absolute inset-0 bg-primary/20 mix-blend-overlay" />
                     </motion.div>

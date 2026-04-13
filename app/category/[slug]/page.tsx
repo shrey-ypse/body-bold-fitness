@@ -8,26 +8,42 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { use } from "react";
 
+import { useState, useEffect } from "react";
+import { getProducts } from "@/lib/actions";
+
 export default function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
     const resolvedParams = use(params);
     const router = useRouter();
-    const categoryProducts = PRODUCTS.filter((p) => p.categorySlug === resolvedParams.slug);
+    const [categoryProducts, setCategoryProducts] = useState<any[]>([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        const loadProducts = async () => {
+            const data = await getProducts();
+            const allProducts = data.length > 0 ? data : (await import("@/data/products")).PRODUCTS;
+            setCategoryProducts(allProducts.filter((p: any) => p.categorySlug === resolvedParams.slug));
+            setIsLoaded(true);
+        };
+        loadProducts();
+    }, [resolvedParams.slug]);
+
+    if (!isLoaded) return <div className="min-h-screen bg-background-dark pt-24" />;
 
     if (categoryProducts.length === 0) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-background-dark text-white pt-24">
                 <div className="text-center">
-                    <h1 className="text-4xl font-bold mb-4 uppercase">Category Not Found</h1>
-                    <button onClick={() => router.push("/")} className="text-primary hover:underline">Back to Home</button>
+                    <h1 className="text-4xl font-bold mb-4 uppercase tracking-tighter">Category Empty</h1>
+                    <button onClick={() => router.push("/")} className="text-primary hover:underline font-bold uppercase tracking-widest text-xs">Back to Home</button>
                 </div>
             </div>
         );
     }
 
-    const categoryName = categoryProducts[0].category;
+    const categoryName = categoryProducts[0]?.category || "Collection";
 
     return (
-        <div className="flex flex-col min-h-screen bg-background-light dark:bg-background-dark">
+        <div className="flex flex-col min-h-screen bg-background-dark">
             <Navbar />
             <main className="flex-grow pt-32 pb-24">
                 <div className="max-w-7xl mx-auto px-6">

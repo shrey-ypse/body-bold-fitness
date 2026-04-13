@@ -7,7 +7,7 @@ import { getWhatsAppUrl } from "@/data/products";
 
 export const Bundles = () => {
     return (
-        <section className="py-24 md:py-32 bg-background-light dark:bg-background-dark relative overflow-hidden">
+        <section className="py-24 md:py-32 bg-background-dark relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-24 gap-8 text-center md:text-left">
                     <div className="max-w-xl mx-auto md:mx-0">

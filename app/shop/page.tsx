@@ -9,18 +9,22 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Search as SearchIcon, X } from "lucide-react";
 
+import { getProducts } from "@/lib/actions";
+
 function ShopContent() {
     const searchParams = useSearchParams();
     const [filter, setFilter] = useState("all");
     const [searchQuery, setSearchQuery] = useState("");
-    const [localProducts, setLocalProducts] = useState(PRODUCTS);
+    const [localProducts, setLocalProducts] = useState<any[]>([]);
     const categories = ["all", "strength", "cardio", "services"];
 
     useEffect(() => {
-        const savedData = localStorage.getItem("bolt_vault_data");
-        if (savedData) {
-            setLocalProducts(JSON.parse(savedData));
-        }
+        const loadProducts = async () => {
+            const data = await getProducts();
+            const initialProducts = await import("@/data/products").then(m => m.PRODUCTS);
+            setLocalProducts(data.length > 0 ? data : initialProducts);
+        };
+        loadProducts();
 
         const cat = searchParams.get("cat");
         if (cat && categories.includes(cat)) {
@@ -152,7 +156,7 @@ function ShopContent() {
 
 export default function ShopPage() {
     return (
-        <div className="flex flex-col min-h-screen bg-background-light dark:bg-background-dark">
+        <div className="flex flex-col min-h-screen bg-background-dark">
             <Navbar />
             <Suspense fallback={<div className="min-h-screen bg-background-dark" />}>
                 <ShopContent />

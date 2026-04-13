@@ -2,12 +2,24 @@
 
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
-import { useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { PRODUCTS, getWhatsAppUrl } from "@/data/products";
+import { Product, getWhatsAppUrl } from "@/data/products";
+import { getProducts } from "@/lib/actions";
 
 export const ProductShowcase = () => {
+    const [products, setProducts] = useState<Product[]>([]);
     const scrollRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const loadProducts = async () => {
+            const data = await getProducts();
+            // Use static fallback if DB is empty
+            const initialProducts = await import("@/data/products").then(m => m.PRODUCTS);
+            setProducts(data.length > 0 ? data : initialProducts);
+        };
+        loadProducts();
+    }, []);
 
     const scroll = (direction: "left" | "right") => {
         if (scrollRef.current) {
@@ -53,16 +65,16 @@ export const ProductShowcase = () => {
 
             <div
                 ref={scrollRef}
-                className="flex space-x-6 md:space-x-8 overflow-x-auto no-scrollbar px-6 md:px-[calc((100vw-80rem)/2+1.5rem)] pb-12"
+                className="flex space-x-6 md:space-x-8 overflow-x-auto no-scrollbar px-6 md:px-[calc((100vw-80rem)/2+1.5rem)] pb-12 snap-x snap-mandatory"
             >
-                {PRODUCTS.map((product, index) => (
+                {products.map((product, index) => (
                     <motion.div
                         key={product.id}
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true, margin: "-50px" }}
                         transition={{ delay: index * 0.05 }}
-                        className="min-w-[280px] md:min-w-[450px] aspect-[4/5] relative rounded-[2rem] md:rounded-[3rem] overflow-hidden group shadow-2xl transform-gpu"
+                        className="min-w-[280px] md:min-w-[450px] aspect-[4/5] relative rounded-[2rem] md:rounded-[3rem] overflow-hidden group shadow-2xl transform-gpu snap-center"
                     >
                         <img
                             src={product.image}

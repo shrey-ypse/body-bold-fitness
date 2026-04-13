@@ -8,19 +8,21 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ChevronLeft, Calendar, Clock, ArrowRight } from "lucide-react";
 
+import { getBlogs } from "@/lib/actions";
+
 export default function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
     const resolvedParams = use(params);
     const [allPosts, setAllPosts] = useState<BlogPost[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        const savedData = localStorage.getItem("bolt_blog_data");
-        if (savedData) {
-            setAllPosts(JSON.parse(savedData));
-        } else {
-            setAllPosts(BLOG_POSTS);
-        }
-        setIsLoaded(true);
+        const loadPosts = async () => {
+            const data = await getBlogs();
+            const initialBlogs = await import("@/data/blog").then(m => m.BLOG_POSTS);
+            setAllPosts(data.length > 0 ? data : initialBlogs);
+            setIsLoaded(true);
+        };
+        loadPosts();
     }, []);
 
     const post = allPosts.find(p => p.slug === resolvedParams.slug);
@@ -39,7 +41,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
     }
 
     return (
-        <div className="flex flex-col min-h-screen bg-background-light dark:bg-background-dark font-lexend">
+        <div className="flex flex-col min-h-screen bg-background-dark font-lexend">
             <Navbar />
 
             <main className="flex-grow pt-24 md:pt-32 pb-24">

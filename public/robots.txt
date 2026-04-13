@@ -1,3 +1,9 @@
+# *
 User-agent: *
 Allow: /
+
+# Host
+Host: https://bodyboltfitness.store
+
+# Sitemaps
 Sitemap: https://bodyboltfitness.store/sitemap.xml

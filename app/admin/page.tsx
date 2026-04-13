@@ -31,7 +31,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { PRODUCTS, Product } from "@/data/products";
 import { BLOG_POSTS, BlogPost } from "@/data/blog";
-import { verifyAdminPassword } from "@/lib/actions";
+import { verifyAdminPassword, getProducts, saveProduct, deleteProduct, getBlogs, saveBlog, deleteBlog, uploadImage } from "@/lib/actions";
 
 type Tab = "overview" | "inventory" | "blog";
 
@@ -53,27 +53,21 @@ export default function AdminPanel() {
         setTimeout(() => setNotifications(prev => prev.filter(n => n.id !== id)), 3000);
     };
 
-    // Load from LocalStorage on mount
+    // Load from Supabase on mount
     useEffect(() => {
-        const savedProducts = localStorage.getItem("bolt_vault_data");
-        const savedBlogs = localStorage.getItem("bolt_blog_data");
+        const loadData = async () => {
+            const [products, blogs] = await Promise.all([
+                getProducts(),
+                getBlogs()
+            ]);
 
-        if (savedProducts) setLocalProducts(JSON.parse(savedProducts));
-        else setLocalProducts(PRODUCTS);
-
-        if (savedBlogs) setLocalBlogs(JSON.parse(savedBlogs));
-        else setLocalBlogs(BLOG_POSTS);
+            // Fallback to static data if DB is empty but connected
+            setLocalProducts(products.length > 0 ? products : PRODUCTS);
+            setLocalBlogs(blogs.length > 0 ? blogs : BLOG_POSTS);
+        };
+        
+        loadData();
     }, []);
-
-    const syncProducts = (updatedList: Product[]) => {
-        setLocalProducts(updatedList);
-        localStorage.setItem("bolt_vault_data", JSON.stringify(updatedList));
-    };
-
-    const syncBlogs = (updatedList: BlogPost[]) => {
-        setLocalBlogs(updatedList);
-        localStorage.setItem("bolt_blog_data", JSON.stringify(updatedList));
-    };
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -86,33 +80,57 @@ export default function AdminPanel() {
         }
     };
 
-    const handleSaveProduct = (updatedProduct: Product) => {
-        const newList = localProducts.map(p => p.id === updatedProduct.id ? updatedProduct : p);
-        syncProducts(newList);
-        setEditingProduct(null);
-        addNotification(`${updatedProduct.name} successfully updated.`, "success");
-    };
-
-    const handleDeleteProduct = (id: string) => {
-        if (confirm("This action is irreversible. Delete this gear?")) {
-            const newList = localProducts.filter(p => p.id !== id);
-            syncProducts(newList);
-            addNotification("Product purged from vault.", "success");
+    const handleSaveProduct = async (updatedProduct: Product) => {
+        const result = await saveProduct(updatedProduct);
+        if (result.success) {
+            const newList = localProducts.map(p => p.id === updatedProduct.id ? updatedProduct : p);
+            if (!localProducts.find(p => p.id === updatedProduct.id)) {
+                newList.unshift(updatedProduct);
+            }
+            setLocalProducts(newList);
+            setEditingProduct(null);
+            addNotification(`${updatedProduct.name} successfully updated.`, "success");
+        } else {
+            addNotification(`Save failed: ${result.error}`, "error");
         }
     };
 
-    const handleSaveBlog = (updatedBlog: BlogPost) => {
-        const newList = localBlogs.map(b => b.id === updatedBlog.id ? updatedBlog : b);
-        syncBlogs(newList);
-        setEditingBlog(null);
-        addNotification(`"${updatedBlog.title}" successfully published.`, "success");
+    const handleDeleteProduct = async (id: string) => {
+        if (confirm("This action is irreversible. Delete this gear?")) {
+            const result = await deleteProduct(id);
+            if (result.success) {
+                setLocalProducts(prev => prev.filter(p => p.id !== id));
+                addNotification("Product purged from vault.", "success");
+            } else {
+                addNotification(`Delete failed: ${result.error}`, "error");
+            }
+        }
     };
 
-    const handleDeleteBlog = (id: string) => {
+    const handleSaveBlog = async (updatedBlog: BlogPost) => {
+        const result = await saveBlog(updatedBlog);
+        if (result.success) {
+            const newList = localBlogs.map(b => b.id === updatedBlog.id ? updatedBlog : b);
+            if (!localBlogs.find(b => b.id === updatedBlog.id)) {
+                newList.unshift(updatedBlog);
+            }
+            setLocalBlogs(newList);
+            setEditingBlog(null);
+            addNotification(`"${updatedBlog.title}" successfully published.`, "success");
+        } else {
+            addNotification(`Save failed: ${result.error}`, "error");
+        }
+    };
+
+    const handleDeleteBlog = async (id: string) => {
         if (confirm("Purge this article from the Knowledge Vault?")) {
-            const newList = localBlogs.filter(b => b.id !== id);
-            syncBlogs(newList);
-            addNotification("Article deleted.", "success");
+            const result = await deleteBlog(id);
+            if (result.success) {
+                setLocalBlogs(prev => prev.filter(b => b.id !== id));
+                addNotification("Article deleted.", "success");
+            } else {
+                addNotification(`Delete failed: ${result.error}`, "error");
+            }
         }
     };
 
@@ -229,8 +247,7 @@ export default function AdminPanel() {
                                     category: "Strength",
                                     categorySlug: "strength"
                                 };
-                                const newList = [newProduct, ...localProducts];
-                                syncProducts(newList);
+                                setLocalProducts([newProduct, ...localProducts]);
                                 setEditingProduct(newProduct);
                             }}
                         />
@@ -255,8 +272,7 @@ export default function AdminPanel() {
                                     image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80",
                                     tags: ["Fitness"]
                                 };
-                                const newList = [newBlog, ...localBlogs];
-                                syncBlogs(newList);
+                                setLocalBlogs([newBlog, ...localBlogs]);
                                 setEditingBlog(newBlog);
                             }}
                         />
@@ -445,17 +461,29 @@ const ProductPowerEditor = ({ product, onClose, onSave }: { product: Product, on
     const [uploading, setUploading] = useState(false);
     const fileRef = useRef<HTMLInputElement>(null);
 
-    const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
         setUploading(true);
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            const res = reader.result as string;
-            setFormData({ ...formData, images: [...formData.images, res], image: res });
+        
+        try {
+            // Read as data URL for immediate local preview
+            const reader = new FileReader();
+            reader.onloadend = async () => {
+                const base64 = reader.result as string;
+                // Upload to Supabase Storage
+                const publicUrl = await uploadImage(base64, file.name);
+                
+                if (publicUrl) {
+                    setFormData({ ...formData, images: [...formData.images, publicUrl], image: publicUrl });
+                }
+                setUploading(false);
+            };
+            reader.readAsDataURL(file);
+        } catch (error) {
+            console.error("Upload failed", error);
             setUploading(false);
-        };
-        reader.readAsDataURL(file);
+        }
     };
 
     return (
@@ -472,15 +500,15 @@ const ProductPowerEditor = ({ product, onClose, onSave }: { product: Product, on
                 transition={{ type: "spring", damping: 25, stiffness: 120 }}
                 className="w-full max-w-6xl h-full bg-background-dark border-l border-white/10 p-6 md:p-10 lg:p-20 overflow-y-auto relative rounded-t-[3rem] md:rounded-t-0 md:rounded-l-[4rem] shadow-[-100px_0_100px_rgba(0,0,0,0.5)]"
             >
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-20">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12 md:mb-20">
                     <div>
                         <div className="flex items-center gap-3 mb-4">
                             <Activity className="text-primary w-5 h-5" />
                             <span className="text-[10px] font-bold text-primary uppercase tracking-[0.5em]">System Editor v3.0</span>
                         </div>
-                        <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-none">GEAR <span className="text-primary italic">OS</span></h2>
+                        <h2 className="text-4xl md:text-8xl font-black tracking-tighter uppercase leading-none">GEAR <span className="text-primary italic">OS</span></h2>
                     </div>
-                    <button onClick={onClose} className="p-4 md:p-8 bg-white/5 rounded-full hover:bg-white/10 hover:rotate-90 transition-all self-end md:self-auto"><CloseIcon size={24} className="md:w-8 md:h-8" /></button>
+                    <button onClick={onClose} className="p-4 md:p-8 bg-white/5 rounded-full hover:bg-white/10 hover:rotate-90 transition-all self-end md:self-auto"><CloseIcon size={20} className="md:w-8 md:h-8" /></button>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
@@ -517,8 +545,9 @@ const ProductPowerEditor = ({ product, onClose, onSave }: { product: Product, on
 
                         <EditorField label="Technical Documentation">
                             <textarea
-                                rows={8}
-                                className="w-full bg-white/5 border border-white/10 rounded-[2rem] p-8 text-lg font-medium text-white/60 leading-relaxed outline-none focus:border-primary/50"
+                                rows={6}
+                                md-rows={8}
+                                className="w-full bg-white/5 border border-white/10 rounded-[2rem] p-6 md:p-8 text-base md:text-lg font-medium text-white/60 leading-relaxed outline-none focus:border-primary/50"
                                 value={formData.fullDescription}
                                 onChange={e => setFormData({ ...formData, fullDescription: e.target.value })}
                             />
@@ -541,7 +570,7 @@ const ProductPowerEditor = ({ product, onClose, onSave }: { product: Product, on
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 h-[400px] overflow-y-auto no-scrollbar pr-2">
                                 {formData.images.map((img, i) => (
                                     <div key={i} className={`relative aspect-square rounded-3xl overflow-hidden border-2 transition-all group ${formData.image === img ? 'border-primary' : 'border-transparent'}`}>
-                                        <img src={img} className="w-full h-full object-cover" />
+                                        <img src={img} className="w-full h-full object-cover" loading="lazy" />
                                         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3">
                                             <button onClick={() => setFormData({ ...formData, image: img })} className="p-3 bg-primary text-black rounded-xl hover:scale-110"><Check size={16} /></button>
                                             <button
@@ -589,15 +618,15 @@ const BlogPowerEditor = ({ blog, onClose, onSave }: { blog: BlogPost, onClose: (
                 transition={{ type: "spring", damping: 25, stiffness: 120 }}
                 className="w-full max-w-6xl h-full bg-background-dark border-l border-white/10 p-6 md:p-10 lg:p-20 overflow-y-auto relative rounded-t-[3rem] md:rounded-t-0 md:rounded-l-[4rem] shadow-[-100px_0_100px_rgba(0,0,0,0.5)]"
             >
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-20">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12 md:mb-20">
                     <div>
                         <div className="flex items-center gap-3 mb-4">
                             <BookOpen className="text-primary w-5 h-5" />
                             <span className="text-[10px] font-bold text-primary uppercase tracking-[0.5em]">Vault Editor v3.0</span>
                         </div>
-                        <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-none">SCRIPT <span className="text-primary italic">OS</span></h2>
+                        <h2 className="text-4xl md:text-8xl font-black tracking-tighter uppercase leading-none">SCRIPT <span className="text-primary italic">OS</span></h2>
                     </div>
-                    <button onClick={onClose} className="p-4 md:p-8 bg-white/5 rounded-full hover:bg-white/10 hover:rotate-90 transition-all self-end md:self-auto"><CloseIcon size={24} className="md:w-8 md:h-8" /></button>
+                    <button onClick={onClose} className="p-4 md:p-8 bg-white/5 rounded-full hover:bg-white/10 hover:rotate-90 transition-all self-end md:self-auto"><CloseIcon size={20} className="md:w-8 md:h-8" /></button>
                 </div>
 
                 <div className="space-y-12">

@@ -75,7 +75,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <body className={`${lexend.variable} font-display antialiased`}>
         <script
           type="application/ld+json"

@@ -13,7 +13,7 @@ const iconMap = {
 
 export const TrustBadges = () => {
     return (
-        <section className="py-20 md:py-24 bg-background-light dark:bg-background-dark border-y border-neutral-dark/5 dark:border-white/5">
+        <section className="py-20 md:py-24 bg-background-dark border-y border-neutral-dark/5 dark:border-white/5">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16">
                     {TRUST_FEATURES.map((feature, index) => {

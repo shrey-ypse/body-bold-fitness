@@ -6,7 +6,7 @@ import { TESTIMONIALS } from "@/data/site";
 
 export const Testimonials = () => {
     return (
-        <section className="py-24 md:py-32 bg-background-light dark:bg-background-dark relative overflow-hidden">
+        <section className="py-24 md:py-32 bg-background-dark relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="text-center mb-16 md:mb-24">
                     <motion.span

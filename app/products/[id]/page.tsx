@@ -8,18 +8,22 @@ import { Footer } from "@/components/Footer";
 import { ChevronLeft, Check, MessageSquare } from "lucide-react";
 import { motion } from "framer-motion";
 
+import { getProducts } from "@/lib/actions";
+
 export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
     const resolvedParams = use(params);
     const router = useRouter();
-    const [allProducts, setAllProducts] = useState(PRODUCTS);
+    const [allProducts, setAllProducts] = useState<any[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        const savedData = localStorage.getItem("bolt_vault_data");
-        if (savedData) {
-            setAllProducts(JSON.parse(savedData));
-        }
-        setIsLoaded(true);
+        const loadProducts = async () => {
+            const data = await getProducts();
+            const initialProducts = await import("@/data/products").then(m => m.PRODUCTS);
+            setAllProducts(data.length > 0 ? data : initialProducts);
+            setIsLoaded(true);
+        };
+        loadProducts();
     }, []);
 
     const product = allProducts.find((p) => p.id === resolvedParams.id);
@@ -52,7 +56,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     }
 
     return (
-        <div className="flex flex-col min-h-screen bg-background-light dark:bg-background-dark">
+        <div className="flex flex-col min-h-screen bg-background-dark">
             <Navbar />
             <main className="flex-grow pt-24 md:pt-32 pb-16 md:pb-24">
                 <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -86,7 +90,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
                             {product.images.length > 1 && (
                                 <div className="grid grid-cols-4 gap-3 md:gap-4">
-                                    {product.images.map((img, i) => (
+                                    {product.images.map((img: string, i: number) => (
                                         <button
                                             key={i}
                                             onClick={() => setActiveImage(img)}
@@ -122,7 +126,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                                 <div>
                                     <h3 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] mb-4 dark:text-white">Key Features</h3>
                                     <ul className="space-y-3">
-                                        {product.features.map((feature, i) => (
+                                        {product.features.map((feature: string, i: number) => (
                                             <li key={i} className="flex items-start gap-3 text-xs md:text-sm text-neutral-dark/60 dark:text-neutral-light/60">
                                                 <Check className="text-primary mt-0.5 shrink-0 w-4 h-4 md:w-5 md:h-5" />
                                                 {feature}
@@ -134,10 +138,10 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                                     <div>
                                         <h3 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] mb-4 dark:text-white">Specifications</h3>
                                         <div className="space-y-3">
-                                            {Object.entries(product.specs).map(([key, value], i) => (
+                                            {Object.entries(product.specs).map(([key, value], i: number) => (
                                                 <div key={i} className="flex justify-between border-b border-neutral-dark/10 dark:border-white/10 pb-2">
                                                     <span className="text-[9px] uppercase tracking-widest opacity-50">{key}</span>
-                                                    <span className="text-xs md:text-sm font-medium">{value}</span>
+                                                    <span className="text-xs md:text-sm font-medium">{String(value)}</span>
                                                 </div>
                                             ))}
                                         </div>

@@ -5,11 +5,26 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+import { useState, useEffect } from "react";
+import { Product } from "@/data/products";
+import { getProducts } from "@/lib/actions";
+
 export const Essentials = () => {
-    const essentialProducts = PRODUCTS.slice(0, 4);
+    const [products, setProducts] = useState<Product[]>([]);
+
+    useEffect(() => {
+        const loadProducts = async () => {
+            const data = await getProducts();
+            const initialProducts = await import("@/data/products").then(m => m.PRODUCTS);
+            setProducts(data.length > 0 ? data : initialProducts);
+        };
+        loadProducts();
+    }, []);
+
+    const essentialProducts = products.slice(0, 4);
 
     return (
-        <section className="py-24 md:py-32 bg-background-light dark:bg-background-dark overflow-hidden content-visibility-auto">
+        <section className="py-24 md:py-32 bg-background-dark overflow-hidden content-visibility-auto">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-20 gap-8 text-center md:text-left">
                     <div className="max-w-xl mx-auto md:mx-0">

@@ -5,12 +5,27 @@ import Link from "next/link";
 import { BLOG_POSTS } from "@/data/blog";
 import { ArrowRight, Calendar } from "lucide-react";
 
+import { useState, useEffect } from "react";
+import { BlogPost } from "@/data/blog";
+import { getBlogs } from "@/lib/actions";
+
 export const BlogPreview = () => {
+    const [blogs, setBlogs] = useState<BlogPost[]>([]);
+
+    useEffect(() => {
+        const loadBlogs = async () => {
+            const data = await getBlogs();
+            const initialBlogs = await import("@/data/blog").then(m => m.BLOG_POSTS);
+            setBlogs(data.length > 0 ? data : initialBlogs);
+        };
+        loadBlogs();
+    }, []);
+
     // Show latest 3 posts
-    const featuredPosts = BLOG_POSTS.slice(0, 3);
+    const featuredPosts = blogs.slice(0, 3);
 
     return (
-        <section className="py-24 md:py-32 bg-background-light dark:bg-black relative overflow-hidden">
+        <section className="py-24 md:py-32 bg-background-dark relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-24 gap-8">
                     <div className="max-w-xl">

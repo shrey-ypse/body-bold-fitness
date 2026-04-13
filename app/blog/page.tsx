@@ -8,20 +8,23 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 
+import { getBlogs } from "@/lib/actions";
+
 export default function BlogPage() {
     const [posts, setPosts] = useState<BlogPost[]>([]);
 
     useEffect(() => {
-        const savedData = localStorage.getItem("bolt_blog_data");
-        if (savedData) {
-            setPosts(JSON.parse(savedData));
-        } else {
-            setPosts(BLOG_POSTS);
-        }
+        const loadPosts = async () => {
+            const data = await getBlogs();
+            // Use static fallback
+            const initialBlogs = await import("@/data/blog").then(m => m.BLOG_POSTS);
+            setPosts(data.length > 0 ? data : initialBlogs);
+        };
+        loadPosts();
     }, []);
 
     return (
-        <div className="flex flex-col min-h-screen bg-background-light dark:bg-background-dark">
+        <div className="flex flex-col min-h-screen bg-background-dark">
             <Navbar />
 
             <main className="flex-grow pt-24 md:pt-32 pb-16 md:pb-24">
