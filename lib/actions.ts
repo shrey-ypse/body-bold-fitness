@@ -272,7 +272,7 @@ export async function uploadImage(file: File | string, fileName: string): Promis
 
     console.log(`Attempting upload to bucket 'assets' at path: ${path}`);
 
-    const { data, error } = await supabase.storage
+    let { data, error } = await supabase.storage
       .from('assets')
       .upload(path, body, {
         cacheControl: '3600',
@@ -280,10 +280,33 @@ export async function uploadImage(file: File | string, fileName: string): Promis
         contentType: contentType
       });
 
-    if (error) {
-      console.error('Supabase Storage Upload Error:', error.message, error);
+    // SELF-HEALING: If bucket doesn't exist, try to create it
+    if (error && (error.message.includes('not found') || error.message.includes('does not exist'))) {
+      console.log("Bucket 'assets' missing. Attempting auto-creation...");
+      const { error: createError } = await supabase.storage.createBucket('assets', {
+        public: true,
+        fileSizeLimit: 10485760 // 10MB
+      });
+      
+      if (!createError) {
+        console.log("Bucket 'assets' created successfully. Retrying upload...");
+        const retry = await supabase.storage
+          .from('assets')
+          .upload(path, body, {
+            cacheControl: '3600',
+            upsert: false,
+            contentType: contentType
+          });
+        data = retry.data;
+        error = retry.error;
+      }
+    }
+
+    if (error || !data) {
+      console.error('Supabase Storage Upload Error:', error?.message || 'Upload returned no data');
       return null;
     }
+
 
     const { data: { publicUrl } } = supabase.storage
       .from('assets')
