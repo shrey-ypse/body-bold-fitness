@@ -4,8 +4,72 @@ import { supabase } from "./supabase";
 import { Product } from "@/data/products";
 import { BlogPost } from "@/data/blog";
 import { revalidatePath } from "next/cache";
-
 import { cookies } from "next/headers";
+
+/**
+ * Mappers to handle JS camelCase vs DB snake_case conversion with robust defaults
+ */
+const mapProductToDB = (product: Product) => ({
+  id: product.id,
+  name: product.name || "Unnamed Gear",
+  description: product.description || "",
+  full_description: product.fullDescription || "",
+  features: product.features || [],
+  specs: product.specs || {},
+  price: product.price || "₹0",
+  image: product.image || "",
+  images: product.images || [],
+  category: product.category || "Strength",
+  category_slug: product.categorySlug || "strength",
+  badge: product.badge || "",
+  is_large: product.isLarge || false,
+  is_tall: product.isTall || false,
+});
+
+const mapProductFromDB = (db: any): Product => ({
+  id: db.id,
+  name: db.name || "Unnamed Gear",
+  description: db.description || "",
+  fullDescription: db.full_description || "",
+  features: db.features || [],
+  specs: db.specs || {},
+  price: db.price || "₹0",
+  image: db.image || "",
+  images: db.images || [],
+  category: db.category || "Strength",
+  categorySlug: db.category_slug || "strength",
+  badge: db.badge || "",
+  isLarge: db.is_large || false,
+  isTall: db.is_tall || false,
+});
+
+const mapBlogToDB = (blog: BlogPost) => ({
+  id: blog.id,
+  slug: blog.slug || "new-post",
+  title: blog.title || "Untitled Post",
+  excerpt: blog.excerpt || "",
+  content: blog.content || "",
+  date: blog.date || new Date().toISOString(),
+  author: blog.author || "Body Bolt",
+  reading_time: blog.readingTime || "5 min",
+  category: blog.category || "Fitness",
+  image: blog.image || "",
+  tags: blog.tags || [],
+});
+
+const mapBlogFromDB = (db: any): BlogPost => ({
+  id: db.id,
+  slug: db.slug || "new-post",
+  title: db.title || "Untitled Post",
+  excerpt: db.excerpt || "",
+  content: db.content || "",
+  date: db.date || "",
+  author: db.author || "",
+  readingTime: db.reading_time || "",
+  category: db.category || "",
+  image: db.image || "",
+  tags: db.tags || [],
+});
 
 /**
  * Verifies the admin password and sets a secure session cookie.
@@ -37,6 +101,7 @@ async function checkAuth() {
   const cookieStore = await cookies();
   const session = cookieStore.get("bolt_session");
   if (!session || session.value !== "active") {
+    console.error("Auth Failed: Local session invalid or key mismatch.");
     throw new Error("Unauthorized Access Detected. Protocol Terminated.");
   }
 }
@@ -44,123 +109,139 @@ async function checkAuth() {
 // --- Product Actions ---
 
 export async function getProducts(): Promise<Product[]> {
-  const { data, error } = await supabase
-    .from('products')
-    .select('*')
-    .order('created_at', { ascending: false });
+  try {
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .order('created_at', { ascending: false });
 
-  if (error) {
-    console.error('Error fetching products:', error);
+    if (error) {
+      console.error('Error fetching products:', error);
+      return [];
+    }
+
+    return (data || []).map(mapProductFromDB);
+  } catch (err) {
+    console.error('Critical failure in getProducts:', err);
     return [];
   }
-
-  return data as Product[];
 }
 
 export async function saveProduct(product: Product): Promise<{ success: boolean; error?: string }> {
   try {
     await checkAuth();
+    const dbProduct = mapProductToDB(product);
+    
+    // Attempt upsert
+    const { data, error } = await supabase
+      .from('products')
+      .upsert(dbProduct)
+      .select();
+
+    if (error) {
+      console.error('Supabase Product Save Error:', error);
+      return { success: false, error: `${error.message} (${error.code})` };
+    }
+
+    // Revalidate paths to reflect changes across the site
+    const paths = ['/', '/shop', '/products', `/products/${product.id}`, '/admin'];
+    paths.forEach(p => revalidatePath(p));
+    
+    return { success: true };
   } catch (e: any) {
-    return { success: false, error: e.message };
+    console.error('saveProduct exception:', e);
+    return { success: false, error: e.message || "Unknown internal error" };
   }
-
-  const { data, error } = await supabase
-    .from('products')
-    .upsert(product)
-    .select();
-
-  if (error) {
-    console.error('Error saving product:', error);
-    return { success: false, error: error.message };
-  }
-
-  revalidatePath('/');
-  revalidatePath('/products');
-  revalidatePath(`/products/${product.id}`);
-  return { success: true };
 }
 
 export async function deleteProduct(id: string): Promise<{ success: boolean; error?: string }> {
   try {
     await checkAuth();
+    const { error } = await supabase
+      .from('products')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      console.error('Error deleting product:', error);
+      return { success: false, error: error.message };
+    }
+
+    revalidatePath('/');
+    revalidatePath('/shop');
+    revalidatePath('/admin');
+    return { success: true };
   } catch (e: any) {
     return { success: false, error: e.message };
   }
-
-  const { error } = await supabase
-    .from('products')
-    .delete()
-    .eq('id', id);
-
-  if (error) {
-    console.error('Error deleting product:', error);
-    return { success: false, error: error.message };
-  }
-
-  revalidatePath('/');
-  revalidatePath('/products');
-  return { success: true };
 }
 
 // --- Blog Actions ---
 
 export async function getBlogs(): Promise<BlogPost[]> {
-  const { data, error } = await supabase
-    .from('blogs')
-    .select('*')
-    .order('created_at', { ascending: false });
+  try {
+    const { data, error } = await supabase
+      .from('blogs')
+      .select('*')
+      .order('created_at', { ascending: false });
 
-  if (error) {
-    console.error('Error fetching blogs:', error);
+    if (error) {
+      console.error('Error fetching blogs:', error);
+      return [];
+    }
+
+    return (data || []).map(mapBlogFromDB);
+  } catch (err) {
+    console.error('Critical failure in getBlogs:', err);
     return [];
   }
-
-  return data as BlogPost[];
 }
 
 export async function saveBlog(blog: BlogPost): Promise<{ success: boolean; error?: string }> {
   try {
     await checkAuth();
+    const dbBlog = mapBlogToDB(blog);
+
+    const { error } = await supabase
+      .from('blogs')
+      .upsert(dbBlog);
+
+    if (error) {
+      console.error('Error saving blog:', error);
+      return { success: false, error: error.message };
+    }
+
+    revalidatePath('/');
+    revalidatePath('/blog');
+    revalidatePath(`/blog/${blog.slug}`);
+    revalidatePath('/admin');
+    
+    return { success: true };
   } catch (e: any) {
     return { success: false, error: e.message };
   }
-
-  const { data, error } = await supabase
-    .from('blogs')
-    .upsert(blog)
-    .select();
-
-  if (error) {
-    console.error('Error saving blog:', error);
-    return { success: false, error: error.message };
-  }
-
-  revalidatePath('/');
-  revalidatePath('/blog');
-  revalidatePath(`/blog/${blog.slug}`);
-  return { success: true };
 }
 
 export async function deleteBlog(id: string): Promise<{ success: boolean; error?: string }> {
   try {
     await checkAuth();
+    const { error } = await supabase
+      .from('blogs')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      console.error('Error deleting blog:', error);
+      return { success: false, error: error.message };
+    }
+
+    revalidatePath('/');
+    revalidatePath('/blog');
+    revalidatePath('/admin');
+    return { success: true };
   } catch (e: any) {
     return { success: false, error: e.message };
   }
-
-  const { error } = await supabase
-    .from('blogs')
-    .delete()
-    .eq('id', id);
-
-  if (error) {
-    console.error('Error deleting blog:', error);
-    return { success: false, error: error.message };
-  }
-
-  revalidatePath('/');
-  revalidatePath('/blog');
-  return { success: true };
 }
 
 // --- Image Upload Action ---
@@ -168,34 +249,37 @@ export async function deleteBlog(id: string): Promise<{ success: boolean; error?
 export async function uploadImage(file: File | string, fileName: string): Promise<string | null> {
   try {
     await checkAuth();
+
+    // If string, assume it's base64 and convert
+    let body: any = file;
+    if (typeof file === 'string' && file.startsWith('data:')) {
+      const base64Data = file.split(',')[1];
+      const binaryData = Buffer.from(base64Data, 'base64');
+      body = binaryData;
+    }
+
+    const { data, error } = await supabase.storage
+      .from('assets')
+      .upload(`uploads/${Date.now()}-${fileName}`, body, {
+        cacheControl: '3600',
+        upsert: false,
+        contentType: typeof file === 'string' ? 'image/png' : (file as any).type || 'image/png'
+      });
+
+    if (error) {
+      console.error('Upload error in Storage:', error);
+      return null;
+    }
+
+    const { data: { publicUrl } } = supabase.storage
+      .from('assets')
+      .getPublicUrl(data.path);
+
+    return publicUrl;
   } catch (e) {
+    console.error('uploadImage exception:', e);
     return null;
   }
-
-  // If string, assume it's base64 and convert
-  let body: any = file;
-  if (typeof file === 'string' && file.startsWith('data:')) {
-    const base64Data = file.split(',')[1];
-    const binaryData = Buffer.from(base64Data, 'base64');
-    body = binaryData;
-  }
-
-  const { data, error } = await supabase.storage
-    .from('assets')
-    .upload(`uploads/${Date.now()}-${fileName}`, body, {
-      cacheControl: '3600',
-      upsert: false,
-      contentType: typeof file === 'string' ? 'image/png' : file.type
-    });
-
-  if (error) {
-    console.error('Upload error:', error);
-    return null;
-  }
-
-  const { data: { publicUrl } } = supabase.storage
-    .from('assets')
-    .getPublicUrl(data.path);
-
-  return publicUrl;
 }
+
+
