@@ -96,25 +96,26 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
                         transition={{ delay: 0.3 }}
                         className="prose prose-invert prose-p:text-white/60 prose-headings:text-white prose-headings:uppercase prose-headings:tracking-tighter prose-strong:text-primary max-w-none"
                     >
-                        <div className="space-y-8 bg-white/[0.02] p-8 md:p-12 rounded-[3rem] border border-white/5 leading-relaxed text-base md:text-xl text-white/70">
+                        <div className="space-y-8 bg-white/[0.03] p-8 md:p-12 rounded-[3rem] border border-white/10 leading-relaxed text-base md:text-xl text-white/90">
                             {post.content.split('\n\n').map((para, i) => {
-                                if (para.startsWith('# ')) return <h1 key={i} className="text-3xl md:text-5xl font-bold mt-12 mb-6">{para.replace('# ', '')}</h1>;
-                                if (para.startsWith('## ')) return <h2 key={i} className="text-2xl md:text-4xl font-bold mt-10 mb-5">{para.replace('## ', '')}</h2>;
+                                if (para.startsWith('# ')) return <h1 key={i} className="text-3xl md:text-5xl font-black mt-12 mb-6 text-white">{para.replace('# ', '')}</h1>;
+                                if (para.startsWith('## ')) return <h2 key={i} className="text-2xl md:text-4xl font-black mt-10 mb-5 text-white">{para.replace('## ', '')}</h2>;
                                 if (para.startsWith('- ')) {
                                     return (
                                         <ul key={i} className="space-y-4 my-8">
                                             {para.split('\n').map((li, j) => (
-                                                <li key={j} className="flex gap-4 items-start">
-                                                    <div className="w-2 h-2 rounded-full bg-primary mt-2.5 shrink-0" />
+                                                <li key={j} className="flex gap-4 items-start text-white/80">
+                                                    <div className="w-2.5 h-2.5 rounded-full bg-primary mt-2.5 shrink-0 shadow-[0_0_10px_rgba(19,236,55,0.4)]" />
                                                     {li.replace('- ', '')}
                                                 </li>
                                             ))}
                                         </ul>
                                     );
                                 }
-                                return <p key={i}>{para}</p>;
+                                return <p key={i} className="font-normal">{para}</p>;
                             })}
                         </div>
+
                     </motion.div>
 
                     <footer className="mt-20 pt-16 border-t border-white/5">

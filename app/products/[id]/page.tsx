@@ -118,19 +118,21 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                             </h1>
                             <p className="text-2xl md:text-4xl font-bold text-primary mb-6 md:mb-8">{product.price}</p>
 
-                            <p className="text-base md:text-lg leading-relaxed text-neutral-dark/70 dark:text-neutral-light/70 mb-8 md:mb-10">
+                            <p className="text-base md:text-lg leading-relaxed text-white/90 mb-8 md:mb-10 font-normal">
                                 {product.fullDescription}
                             </p>
+
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10 md:mb-12">
                                 <div>
                                     <h3 className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] mb-4 dark:text-white">Key Features</h3>
                                     <ul className="space-y-3">
                                         {product.features.map((feature: string, i: number) => (
-                                            <li key={i} className="flex items-start gap-3 text-xs md:text-sm text-neutral-dark/60 dark:text-neutral-light/60">
+                                            <li key={i} className="flex items-start gap-3 text-xs md:text-sm text-white/80">
                                                 <Check className="text-primary mt-0.5 shrink-0 w-4 h-4 md:w-5 md:h-5" />
                                                 {feature}
                                             </li>
+
                                         ))}
                                     </ul>
                                 </div>
@@ -140,8 +142,9 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                                         <div className="space-y-3">
                                             {Object.entries(product.specs).map(([key, value], i: number) => (
                                                 <div key={i} className="flex justify-between border-b border-neutral-dark/10 dark:border-white/10 pb-2">
-                                                    <span className="text-[9px] uppercase tracking-widest opacity-50">{key}</span>
-                                                    <span className="text-xs md:text-sm font-medium">{String(value)}</span>
+                                                    <span className="text-[9px] uppercase tracking-widest text-white/50">{key}</span>
+                                                    <span className="text-xs md:text-sm font-bold text-white">{String(value)}</span>
+
                                                 </div>
                                             ))}
                                         </div>
