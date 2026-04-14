@@ -248,7 +248,9 @@ export const BUSINESS_DETAILS = {
     whatsappNumber: "919392488297",
     address: "6-22/2, 1st floor Sai Nagar colony, beside A1 Bawarchi, Near HS Dhargha Bus Stop, Shaikpet, Hyderabad, Telangana 500104",
     email: "bodybolt2020@gmail.com",
+    hours: "9:00 AM – 10:00 PM",
 };
+
 
 export function getWhatsAppUrl(productName: string) {
     const message = `Hi, I'm interested in ${productName}. Can you share more details?`;

@@ -52,8 +52,9 @@ export const Showroom = () => {
                                 <div>
                                     <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-2">Hours</h4>
                                     <p className="text-white/60 text-sm md:text-base">
-                                        Open Daily: 9:00 AM – 10:00 PM
+                                        Open Daily: {BUSINESS_DETAILS.hours}
                                     </p>
+
 
                                 </div>
                             </div>
