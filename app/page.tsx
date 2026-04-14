@@ -17,7 +17,9 @@ import { Partners } from "@/components/Partners";
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen selection:bg-primary selection:text-black scroll-smooth">
+      {/* Build Sync: 1776142129 */}
       <Navbar />
+
       <main className="overflow-x-hidden transform-gpu">
         <Hero />
         <div className="content-visibility-auto"><TrustBadges /></div>

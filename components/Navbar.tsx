@@ -35,11 +35,13 @@ export function Navbar() {
             <div className="max-w-7xl mx-auto glass-dark rounded-2xl px-6 md:px-8 py-4 md:py-5 flex items-center justify-between shadow-2xl relative transform-gpu">
                 <div className="flex items-center space-x-12">
                     <Link href="/" className="text-lg md:text-2xl font-bold tracking-tighter flex items-center group gap-1.5 md:gap-2">
-                        <span className="text-white transition-colors">BODY</span>
+                        {/* Build Force Timestamp: 1776142129 */}
+                        <span style={{ color: 'white' }} className="transition-colors">BODY</span>
                         <span className="text-primary transition-colors">BOLT</span>
-                        <span className="text-white transition-colors">FITNESS</span>
-                        <span className="text-white transition-colors">STORE</span>
+                        <span style={{ color: 'white' }} className="transition-colors">FITNESS</span>
+                        <span style={{ color: 'white' }} className="transition-colors">STORE</span>
                     </Link>
+
 
 
                     <div className="hidden md:flex space-x-10 text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">
