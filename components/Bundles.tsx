@@ -5,8 +5,15 @@ import { ArrowRight, Box } from "lucide-react";
 import { BUNDLES } from "@/data/site";
 import { getWhatsAppUrl } from "@/data/products";
 
+import { useState, useEffect } from "react";
+
 export const Bundles = () => {
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
+    if (!mounted) return <div className="py-24 bg-background-dark/50" />;
+
     return (
+
         <section className="py-24 md:py-32 bg-background-dark relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-24 gap-8 text-center md:text-left">

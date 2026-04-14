@@ -11,8 +11,15 @@ const iconMap = {
     HeartPulse
 };
 
+import { useState, useEffect } from "react";
+
 export const TrustBadges = () => {
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
+    if (!mounted) return <div className="py-12 bg-black" />;
+
     return (
+
         <section className="py-20 md:py-24 bg-background-dark border-y border-neutral-dark/5 dark:border-white/5">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16">

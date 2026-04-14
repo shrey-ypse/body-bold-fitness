@@ -3,8 +3,13 @@
 import { motion } from "framer-motion";
 import { MapPin, Phone, Clock, ExternalLink } from "lucide-react";
 import { BUSINESS_DETAILS } from "@/data/products";
+import { useState, useEffect } from "react";
 
 export const Showroom = () => {
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
+    if (!mounted) return <div className="py-24 bg-background-dark" />;
+
     // Google Maps Embed URL (Shaikpet area for context)
     const mapBaseUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15227.9233366458!2d78.3763368871582!3d17.412707400000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb973856a17517%3A0xc395233897647103!2sB%20B%20F%20STORE!5e0!3m2!1sen!2sin!4v1776095890982!5m2!1sen!2sin";
 

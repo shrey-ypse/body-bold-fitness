@@ -3,8 +3,19 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
+import { useState, useEffect } from "react";
+
 export const CTA = () => {
+    const [mounted, setMounted] = useState(false);
+    
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return <div className="py-24 bg-primary" />;
+
     return (
+
         <section className="py-24 md:py-32 bg-primary relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-black via-transparent to-transparent" />

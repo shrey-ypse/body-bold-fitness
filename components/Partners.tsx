@@ -10,8 +10,15 @@ const PARTNERS = [
     { name: "Google", role: "5.0 Rated Store" }
 ];
 
+import { useState, useEffect } from "react";
+
 export const Partners = () => {
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
+    if (!mounted) return <div className="py-24 bg-background-dark" />;
+
     return (
+
         <section className="py-12 bg-black border-y border-white/5 overflow-hidden">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">

@@ -4,8 +4,19 @@ import Link from "next/link";
 import { BUSINESS_DETAILS } from "@/data/products";
 import { Instagram, Facebook, Twitter, Mail, MapPin, Phone } from "lucide-react";
 
+import { useState, useEffect } from "react";
+
 export const Footer = () => {
+    const [mounted, setMounted] = useState(false);
+    
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return <div className="py-20 bg-background-dark border-t border-white/5" />;
+
     return (
+
         <footer className="bg-background-dark text-white pt-24 md:pt-32 pb-12 md:pb-16 border-t border-white/5">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 mb-16 md:mb-24">

@@ -5,16 +5,20 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export const Hero = () => {
+    const [mounted, setMounted] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
         setIsLoaded(true);
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
         checkMobile();
         window.addEventListener("resize", checkMobile, { passive: true });
         return () => window.removeEventListener("resize", checkMobile);
     }, []);
+
+    if (!mounted) return <div className="h-screen bg-background-dark" />;
 
     // Fixed easing type for Framer Motion
     const panelTransition = { duration: 0.8, ease: [0.16, 1, 0.3, 1] as any };

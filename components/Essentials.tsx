@@ -11,9 +11,12 @@ import { getProducts } from "@/lib/actions";
 
 export const Essentials = () => {
     const [products, setProducts] = useState<Product[]>([]);
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
         const loadProducts = async () => {
+
             const data = await getProducts();
             const initialProducts = await import("@/data/products").then(m => m.PRODUCTS);
             setProducts(data.length > 0 ? data : initialProducts);
@@ -22,6 +25,9 @@ export const Essentials = () => {
     }, []);
 
     const essentialProducts = products.slice(0, 4);
+
+    if (!mounted) return <div className="py-24 bg-background-dark" />;
+
 
     return (
         <section className="py-24 md:py-32 bg-background-dark overflow-hidden content-visibility-auto">

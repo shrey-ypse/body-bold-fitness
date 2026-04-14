@@ -4,10 +4,17 @@ import { MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { BUSINESS_DETAILS } from "@/data/products";
 
+import { useState, useEffect } from "react";
+
 export function WhatsAppFloat() {
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
+    if (!mounted) return null;
+
     const whatsappUrl = `https://wa.me/${BUSINESS_DETAILS.whatsappNumber}?text=${encodeURIComponent("Hello! I have a general enquiry about your products.")}`;
 
     return (
+
         <motion.a
             href={whatsappUrl}
             target="_blank"

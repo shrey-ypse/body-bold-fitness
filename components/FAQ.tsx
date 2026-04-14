@@ -29,6 +29,14 @@ const FAQS = [
 
 export const FAQ = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
+    const [mounted, setMounted] = useState(false);
+    
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return <div className="py-24 bg-background-dark" />;
+
 
     return (
         <section className="py-24 md:py-32 bg-background-dark relative overflow-hidden">

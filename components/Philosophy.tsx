@@ -2,8 +2,15 @@
 
 import { motion } from "framer-motion";
 
+import { useState, useEffect } from "react";
+
 export const Philosophy = () => {
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
+    if (!mounted) return <div className="py-24 bg-background-dark" />;
+
     return (
+
         <section className="py-24 md:py-32 bg-background-dark relative overflow-hidden">
             <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/5 -skew-x-12 transform translate-x-1/2 hidden lg:block" />
 
