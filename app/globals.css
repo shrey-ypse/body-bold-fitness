@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #13ec37;
-  --color-primary-dark: #0ebc2c;
+  --color-primary: #ff3131;
+  --color-primary-dark: #d90429;
   --color-background-dark: #080808;
   --color-background-light: #fefefe;
   --color-neutral-dark: #121212;
@@ -11,6 +11,10 @@
   --font-lexend: "Lexend", sans-serif;
 
   --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+:root {
+  --primary: #ff3131;
+  --primary-dark: #d90429;
 }
 
 @layer base {
@@ -55,11 +59,11 @@
   }
 
   .text-glow {
-    text-shadow: 0 0 20px rgba(19, 236, 55, 0.3);
+    text-shadow: 0 0 20px rgba(255, 49, 49, 0.3);
   }
 
   .premium-gradient {
-    background: linear-gradient(135deg, rgba(19, 236, 55, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(135deg, rgba(255, 49, 49, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
   }
 }
 
@@ -118,7 +122,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #13ec37;
+  background: #ff3131;
 }
 
 /* Reduce Motion / Performance optimization for slower devices */

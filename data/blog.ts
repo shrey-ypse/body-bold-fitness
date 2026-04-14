@@ -100,7 +100,7 @@ Strength training builds muscle, which increases your RMR (Resting Metabolic Rat
 ## The Body Bolt Verdict
 For maximum results, we recommend a 70/30 split. 70% Strength training to build shape and 30% Cardio for endurance and finishing fat.
 
-Visit our store to try out our Aerofit series and Pro Strength range today.
+Visit our store to try out our Body Bolt Elite series and Pro Strength range today.
         `,
         date: "Feb 10, 2026",
         author: "Body Bolt Coach",
@@ -123,8 +123,8 @@ Hyderabad's fitness culture is exploding. From Jubilee Hills to Shaikpet, everyo
 Buying gym equipment isn't like buying a t-shirt. These are heavy, mechanical systems. If your treadmill motor has an issue, you cannot ship it back to Mumbai.
 - **Body Bolt Advantage**: We provide on-site service across Hyderabad and Secunderabad within 24-48 hours.
 
-## 2. Aerofit: The Gold Standard in Telangana
-In Hyderabad, Aerofit has become the trusted name for cardio. Whether it's the AC motor series or the home-use DC treadmills, knowing your local authorized dealer ensures you get genuine spares.
+## 2. Body Bolt: The Gold Standard in Telangana
+In Hyderabad, Body Bolt Fitness Store has become the trusted name for cardio. Whether it's the AC motor series or the home-use DC treadmills, choosing our premium local store ensures you get authentic gear and genuine spares.
 
 ## 3. Commercial vs. Home Use Gear
 Don't be fooled by cheap prices online.
@@ -148,6 +148,6 @@ Ready to build your dream gym? Visit the Body Bolt Fitness showroom in Shaikpet 
         readingTime: "8 min read",
         category: "Buying Guide",
         image: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=2070&auto=format&fit=crop",
-        tags: ["Hyderabad", "Aerofit", "Gym Gear", "Buying Guide"]
+        tags: ["Hyderabad", "Body Bolt", "Gym Gear", "Buying Guide"]
     }
 ];

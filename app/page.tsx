@@ -11,6 +11,8 @@ import { Showroom } from "@/components/Showroom";
 import { TrustBadges } from "@/components/TrustBadges";
 import { Bundles } from "@/components/Bundles";
 import { BlogPreview } from "@/components/BlogPreview";
+import { FAQ } from "@/components/FAQ";
+import { Partners } from "@/components/Partners";
 
 export default function Home() {
   return (
@@ -19,11 +21,13 @@ export default function Home() {
       <main className="overflow-x-hidden transform-gpu">
         <Hero />
         <div className="content-visibility-auto"><TrustBadges /></div>
+        <div className="content-visibility-auto"><Partners /></div>
         <div className="content-visibility-auto"><Essentials /></div>
         <div className="content-visibility-auto"><Philosophy /></div>
         <div className="content-visibility-auto"><Bundles /></div>
         <div className="content-visibility-auto"><ProductShowcase /></div>
         <div className="content-visibility-auto"><Testimonials /></div>
+        <div className="content-visibility-auto"><FAQ /></div>
         <div className="content-visibility-auto"><BlogPreview /></div>
         <div className="content-visibility-auto"><Showroom /></div>
         <div className="content-visibility-auto"><CTA /></div>

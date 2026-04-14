@@ -11,7 +11,7 @@ export const TESTIMONIALS = [
         id: 2,
         name: "Mohammed Irfan",
         role: "Fitness Enthusiast",
-        content: "Really happy with the Aerofit treadmill. I use it for 2-3 hours daily and the features are top-notch. The best part was the complimentary training session provided by the showroom after installation.",
+        content: "Really happy with the treadmill from Body Bolt Fitness Store. I use it for 2-3 hours daily and the features are top-notch. The best part was the complimentary training session provided by the showroom after installation.",
         rating: 5,
         avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=100&h=100&auto=format&fit=crop"
     },
@@ -19,7 +19,7 @@ export const TESTIMONIALS = [
         id: 3,
         name: "Rajesh Kumar",
         role: "Commercial Client",
-        content: "Highly recommend BBF Store for their genuine recommendations. Staff like Ansaree don't just try to sell; they suggest gear that actually fits your space and budget. Very responsive team in Shaikpet.",
+        content: "Highly recommend Body Bolt Fitness Store for their genuine recommendations. Staff like Ansaree don't just try to sell; they suggest gear that actually fits your space and budget. Very responsive team in Shaikpet.",
         rating: 5,
         avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=100&h=100&auto=format&fit=crop"
     },
@@ -27,7 +27,7 @@ export const TESTIMONIALS = [
         id: 4,
         name: "Dr. Kavita Reddy",
         role: "Fitness Enthusiast",
-        content: "One of the best places for authentic Aerofit equipment in Hyderabad. Their after-sales service is prompt, and they handled a minor repair for me very quickly. Great guidance on usage too!",
+        content: "One of the best places for authentic fitness equipment in Hyderabad at Body Bolt Fitness Store. Their after-sales service is prompt, and they handled a minor repair for me very quickly. Great guidance on usage too!",
         rating: 5,
         avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=100&h=100&auto=format&fit=crop"
     }
@@ -35,23 +35,23 @@ export const TESTIMONIALS = [
 
 export const TRUST_FEATURES = [
     {
-        title: "Retail Excellence",
-        description: "Premium fitness equipment showroom located in Shaikpet, Hyderabad.",
+        title: "Official Showroom",
+        description: "Visit Body Bolt Fitness Store in Shaikpet to test any equipment before you buy.",
         icon: "ShieldCheck"
     },
     {
-        title: "Quality Guaranteed",
-        description: "Every piece of gear undergoes 10+ durability checks.",
+        title: "Body Bolt Store",
+        description: "Guaranteed authentic machines with official store warranty and support.",
         icon: "Award"
     },
     {
-        title: "Expert Installation",
-        description: "Professional setup by our certified technicians.",
+        title: "Hyderabad Delivery",
+        description: "Professional doorstep setup by our own expert tech team.",
         icon: "Settings"
     },
     {
-        title: "Lifetime Support",
-        description: "Ongoing maintenance and service for all equipment.",
+        title: "Service First",
+        description: "Fast on-site maintenance across Hyderabad for total peace of mind.",
         icon: "HeartPulse"
     }
 ];

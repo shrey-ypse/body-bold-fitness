@@ -50,7 +50,7 @@ export const Testimonials = () => {
                                 </div>
                             </div>
 
-                            <p className="text-sm md:text-base text-neutral-dark/70 dark:text-white/60 italic leading-relaxed">
+                            <p className="text-sm md:text-base text-white/70 italic leading-relaxed">
                                 "{testimonial.content}"
                             </p>
 

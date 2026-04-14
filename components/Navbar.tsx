@@ -28,10 +28,11 @@ export function Navbar() {
         <nav className={`fixed top-0 left-0 right-0 z-50 px-4 md:px-6 py-4 md:py-6 transition-all duration-300 ${scrolled ? "py-2 md:py-3" : ""}`}>
             <div className="max-w-7xl mx-auto glass-dark rounded-2xl px-6 md:px-8 py-4 md:py-5 flex items-center justify-between shadow-2xl relative transform-gpu">
                 <div className="flex items-center space-x-12">
-                    <Link href="/" className="text-xl md:text-2xl font-bold tracking-tighter flex items-center group gap-2">
+                    <Link href="/" className="text-lg md:text-2xl font-bold tracking-tighter flex items-center group gap-1.5 md:gap-2">
                         <span className="group-hover:text-primary transition-colors">BODY</span>
                         <span className="text-primary group-hover:text-white transition-colors">BOLT</span>
                         <span className="group-hover:text-primary transition-colors">FITNESS</span>
+                        <span className="text-primary group-hover:text-white transition-colors">STORE</span>
                     </Link>
                     <div className="hidden md:flex space-x-10 text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">
                         <Link href="/shop?cat=strength" className="hover:text-primary hover:tracking-[0.3em] transition-all duration-300">Strength</Link>

@@ -9,10 +9,14 @@ import { getProducts } from "@/lib/actions";
 
 export const ProductShowcase = () => {
     const [products, setProducts] = useState<Product[]>([]);
+    const [mounted, setMounted] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
 
+
     useEffect(() => {
+        setMounted(true);
         const loadProducts = async () => {
+
             const data = await getProducts();
             
             // Merge: Supabase data + any static products that aren't in the DB yet
@@ -38,6 +42,9 @@ export const ProductShowcase = () => {
             scrollRef.current.scrollTo({ left: scrollTo, behavior: "smooth" });
         }
     };
+    
+    if (!mounted) return <div className="py-40 bg-background-dark" />;
+
 
     return (
         <section className="py-24 md:py-32 bg-background-dark overflow-hidden relative content-visibility-auto">

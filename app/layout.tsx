@@ -10,16 +10,16 @@ const lexend = Lexend({
 });
 
 export const metadata: Metadata = {
-  title: "Body Bolt Fitness | Premium Performance Equipment Hyderabad",
-  description: "Professional grade Aerofit fitness equipment in Hyderabad. Shop our curated collection of strength and performance gear. Authorized dealer for the best gym equipment in Telangana.",
-  keywords: ["fitness", "gym equipment hyderabad", "aerofit treadmill", "bodybolt", "strength training hyderabad", "gym repair services"],
-  authors: [{ name: "Body Bolt Fitness" }],
+  title: "Body Bolt Fitness Store | Premium Performance Equipment Hyderabad",
+  description: "Professional grade fitness equipment in Hyderabad at Body Bolt Fitness Store. Shop our curated collection of strength and performance gear. Premier local source for the best gym equipment in Telangana.",
+  keywords: ["fitness", "gym equipment hyderabad", "body bolt treadmill", "bodybolt store", "strength training hyderabad", "gym repair services"],
+  authors: [{ name: "Body Bolt Fitness Store" }],
   openGraph: {
-    title: "Body Bolt Fitness",
+    title: "Body Bolt Fitness Store",
     description: "Premium Performance Equipment in Hyderabad",
     type: "website",
     url: "https://bodyboltfitness.store",
-    siteName: "Body Bolt Fitness",
+    siteName: "Body Bolt Fitness Store",
   },
   alternates: {
     canonical: "https://bodyboltfitness.store",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#13ec37",
+  themeColor: "#ff3131",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -76,7 +76,8 @@ export default function RootLayout({
 
   return (
     <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
-      <body className={`${lexend.variable} font-display antialiased`}>
+      <body className={`${lexend.variable} font-display antialiased`} suppressHydrationWarning>
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

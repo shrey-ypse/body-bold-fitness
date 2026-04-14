@@ -6,7 +6,7 @@ import { BUSINESS_DETAILS } from "@/data/products";
 
 export const Showroom = () => {
     // Google Maps Embed URL (Shaikpet area for context)
-    const mapBaseUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.163351234567!2d78.3970!3d17.4100!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb96ced7b60707%3A0xe5a3c6be43c7b2a4!2sB%20B%20F%20STORE%20(Body%20Bold%20Fitness%20Store)!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin";
+    const mapBaseUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15227.9233366458!2d78.3763368871582!3d17.412707400000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb973856a17517%3A0xc395233897647103!2sB%20B%20F%20STORE!5e0!3m2!1sen!2sin!4v1776095890982!5m2!1sen!2sin";
 
     // Google Maps Direct Link
     const directLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(BUSINESS_DETAILS.address)}`;

@@ -17,12 +17,12 @@ export interface Product {
 
 export const PRODUCTS: Product[] = [
     {
-        id: "aerofit-treadmill",
-        name: "Aerofit Treadmill - Heavy Duty",
+        id: "body-bolt-elite-treadmill",
+        name: "Body Bolt Elite Treadmill - Heavy Duty",
         description: "Premium commercial-grade treadmill for elite performance and home fat loss in Hyderabad.",
-        fullDescription: "Experience the pinnacle of home fitness with the Aerofit treadmill series, available at Body Bolt Fitness Shaikpet. Designed for long-duration running and intensive gym sessions, it features advanced multi-cushioning technology to protect your joints. Whether you are prepping for a marathon or starting a weight loss journey in Hyderabad, this treadmill delivers professional gym quality directly to your doorstep.",
+        fullDescription: "Experience the pinnacle of home fitness with our signature Body Bolt treadmill series, available at Body Bolt Fitness Store Shaikpet. Designed for long-duration running and intensive gym sessions, it features advanced multi-cushioning technology to protect your joints. Whether you are prepping for a marathon or starting a weight loss journey in Hyderabad, this treadmill delivers professional gym quality directly to your doorstep.",
         features: ["Auto incline (0-15%) for hill training", "Superior shock absorption technology", "Smart console with integrated training apps", "High-power 3.0 HP AC Motor for continuous use"],
-        specs: { "Brand": "Aerofit Original", "Motor": "3.0 HP AC (Peak 6.0 HP)", "Speed Range": "1.0 - 18 km/h", "Max User Weight": "130kg / 285lbs" },
+        specs: { "Brand": "Body Bolt Premium", "Motor": "3.0 HP AC (Peak 6.0 HP)", "Speed Range": "1.0 - 18 km/h", "Max User Weight": "130kg / 285lbs" },
         price: "₹48,000",
         image: "https://images.unsplash.com/photo-1571008887538-b36bb32f4571?q=80&w=2070&auto=format&fit=crop",
         images: [
@@ -128,12 +128,12 @@ export const PRODUCTS: Product[] = [
         categorySlug: "cardio",
     },
     {
-        id: "aerofit-elliptical",
-        name: "Aerofit Elliptical - Semi Commercial",
+        id: "body-bolt-pro-elliptical",
+        name: "Body Bolt Elliptical Pro - Semi Commercial",
         description: "Professional-grade elliptical trainer for smooth, joint-safe cardio in Hyderabad.",
-        fullDescription: "The Aerofit Elliptical is our premium cardio offering for those who demand whisper-quiet performance. Featuring a heavy-precision flywheel and ergonomic stride technology, it provides an elite gym experience at home.",
+        fullDescription: "The Body Bolt Elliptical Pro is our premier cardio offering at Body Bolt Fitness Store for those who demand whisper-quiet performance. Featuring a heavy-precision flywheel and ergonomic stride technology, it provides an elite gym experience at home.",
         features: ["Precision-balanced flywheel", "Silent magnetic resistance", "Ergonomic 20-inch stride", "Commercial-grade durability"],
-        specs: { "Stride": "20 inch", "Usage": "Semi-Commercial / Pro Home", "Resistance": "Magnetic Electronic" },
+        specs: { "Brand": "Body Bolt Core", "Stride": "20 inch", "Usage": "Semi-Commercial / Pro Home", "Resistance": "Magnetic Electronic" },
         price: "₹27,000",
         image: "https://images.unsplash.com/photo-1571019623452-c6ef7a0bb918?q=80&w=2070&auto=format&fit=crop",
         images: ["https://images.unsplash.com/photo-1571019623452-c6ef7a0bb918?q=80&w=2070&auto=format&fit=crop"],
@@ -228,9 +228,9 @@ export const PRODUCTS: Product[] = [
         id: "treadmill-service",
         name: "Treadmill Repair & Maintenance",
         description: "Expert treadmill repair services in Shaikpet, Jubilee Hills, and all of Hyderabad.",
-        fullDescription: "Is your treadmill making noise or showing an error? Our certified technicians at Body Bolt Fitness provide on-site repair and preventative maintenance for all brands (Aerofit, Fitkit, Reebok, etc.). We specialize in treadmill motor repair, belt replacement, and electronic board servicing across Hyderabad.",
+        fullDescription: "Is your treadmill making noise or showing an error? Our certified technicians at Body Bolt Fitness Store provide on-site repair and preventative maintenance for all major brands. We specialize in treadmill motor repair, belt replacement, and electronic board servicing across Hyderabad.",
         features: ["Doorstep technician visit", "Genuine spare parts supply", "Digital diagnostic testing", "Service warranty included"],
-        specs: { "Local Areas": "Shaikpet, Madhapur, Manikonda, Gachibowli", "Standard Service": "₹800 onwards", "Timings": "10 AM - 7 PM" },
+        specs: { "Servicing": "Body Bolt Authorized", "Local Areas": "Shaikpet, Madhapur, Manikonda, Gachibowli", "Standard Service": "₹800 onwards", "Timings": "10 AM - 7 PM" },
         price: "₹800",
         image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop",
         images: [

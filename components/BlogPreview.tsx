@@ -11,8 +11,10 @@ import { getBlogs } from "@/lib/actions";
 
 export const BlogPreview = () => {
     const [blogs, setBlogs] = useState<BlogPost[]>([]);
-
+    const [mounted, setMounted] = useState(false);
+    
     useEffect(() => {
+        setMounted(true);
         const loadBlogs = async () => {
             const data = await getBlogs();
             
@@ -30,6 +32,9 @@ export const BlogPreview = () => {
         };
         loadBlogs();
     }, []);
+
+    if (!mounted) return <div className="py-40 bg-background-dark" />;
+
 
 
     // Show latest 3 posts

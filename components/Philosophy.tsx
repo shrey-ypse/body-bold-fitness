@@ -18,14 +18,14 @@ export const Philosophy = () => {
                             Our Foundation
                         </motion.span>
                         <h2 className="text-4xl md:text-8xl font-bold tracking-tighter uppercase leading-[0.9] mb-8 md:mb-12 dark:text-white">
-                            BUILT <br /> TO <span className="text-primary">LAST.</span>
+                            THE <br /> BODY <span className="text-primary">BOLT</span> STORY.
                         </h2>
-                        <div className="space-y-6 md:space-y-8 text-base md:text-lg text-neutral-dark/70 dark:text-white/60 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                        <div className="space-y-6 md:space-y-8 text-base md:text-lg text-white/60 leading-relaxed max-w-lg mx-auto lg:mx-0">
                             <p>
-                                At Body Bolt Fitness, we believe fitness equipment should be as resilient as the athletes who use it. Every piece in our collection is hand-selected for its structural integrity, ergonomic precision, and long-term durability.
+                                Founded in 2020, Body Bolt Fitness started with a simple mission: to bring professional-grade gym equipment to the homes of Hyderabad without the high-end retail markup. We are fitness enthusiasts who understand that the right gear makes the difference between a chore and a passion.
                             </p>
                             <p>
-                                We don't just sell machines; we provide the foundation for your physical evolution. Whether you are building a professional gym or a personal sanctuary, our gear is engineered to handle the most intensive training loads.
+                                Today, as the premier <strong>Body Bolt Fitness Store</strong>, we serve thousands of customers from Shaikpet to Gachibowli. Every treadmill, bike, and weight set in our showroom is tested by our team for durability and biomechanical precision. We don't just sell machines; we build your personal sanctuary.
                             </p>
                         </div>
 

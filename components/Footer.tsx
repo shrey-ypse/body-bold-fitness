@@ -10,11 +10,11 @@ export const Footer = () => {
             <div className="max-w-7xl mx-auto px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 mb-16 md:mb-24">
                     <div className="text-center lg:text-left">
-                        <Link href="/" className="text-2xl md:text-3xl font-bold tracking-tighter mb-6 md:mb-10 block">
-                            BODY <span className="text-primary">BOLT</span> FITNESS
+                        <Link href="/" className="text-2xl md:text-3xl font-bold tracking-tighter mb-6 md:mb-10 block uppercase">
+                            BODY <span className="text-primary">BOLT</span> FITNESS STORE
                         </Link>
                         <p className="text-base md:text-xl text-white/50 leading-relaxed max-w-md mx-auto lg:mx-0 mb-8 md:mb-12">
-                            The premier source for high-performance fitness equipment in Hyderabad. <span className="text-white/80">Authorized Aerofit Dealer</span> engineering strength since 2026.
+                            The premier source for high-performance fitness equipment in Hyderabad. <span className="text-white/80">Body Bolt Fitness Store</span> engineering strength since 2026.
                         </p>
                         <div className="flex justify-center lg:justify-start space-x-4 md:space-x-6">
                             {[Instagram, Facebook, Twitter].map((Icon, i) => (
@@ -59,11 +59,11 @@ export const Footer = () => {
                                 }
                             }}
                         >
-                            © 2026 BODY BOLT FITNESS. All rights reserved.
+                            © 2026 BODY BOLT FITNESS STORE. All rights reserved.
                         </p>
                         <span className="hidden md:inline opacity-20">|</span>
                         <p className="flex items-center gap-2">
-                            Strategy & Development by <a href="https://webbaordin.com" target="_blank" className="text-primary hover:text-white transition-colors font-black">WEBBAORDIN</a>
+                            Strategy & Development by <a href="https://webboardin.com" target="_blank" className="text-primary hover:text-white transition-colors font-black">WEBBOARDIN</a>
                         </p>
                     </div>
                     <div className="flex space-x-8 md:space-x-12 text-[9px] md:text-[10px] uppercase tracking-widest text-white/30">
