@@ -65,13 +65,14 @@ export function Navbar() {
                         <ShoppingBag className="w-4 h-4 md:w-5 md:h-5" />
                         <span className="absolute top-0 right-0 bg-primary text-black text-[8px] md:text-[9px] font-extrabold h-3 w-3 md:h-4 md:w-4 rounded-full flex items-center justify-center scale-75 group-hover:scale-100 transition-transform">0</span>
                     </Link>
-                    <button
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="md:hidden text-white p-2"
-                        aria-label="Toggle Menu"
-                    >
-                        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                    </button>
+                     <button
+                         onClick={() => setIsOpen(!isOpen)}
+                         className="md:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all active:scale-90"
+                         aria-label="Toggle Menu"
+                     >
+                         {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                     </button>
+
                     <Link
                         href={getWhatsAppUrl("Member Portal Access")}
                         target="_blank"
