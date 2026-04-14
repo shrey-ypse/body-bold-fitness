@@ -34,7 +34,8 @@ export function Navbar() {
         <nav className={`fixed top-0 left-0 right-0 z-50 px-4 md:px-6 py-4 md:py-6 transition-all duration-300 ${scrolled ? "py-2 md:py-3" : ""}`}>
             <div className="max-w-7xl mx-auto glass-dark rounded-2xl px-6 md:px-8 py-4 md:py-5 flex items-center justify-between shadow-2xl relative transform-gpu">
                 <div className="flex items-center space-x-12">
-                    <Link href="/" className="text-lg md:text-2xl font-bold tracking-tighter flex items-center group gap-1.5 md:gap-2">
+                     <Link href="/" className="text-[13px] sm:text-lg md:text-2xl font-bold tracking-tighter flex items-center group gap-1.5 md:gap-2">
+
                         {/* Build Force Timestamp: 1776142129 */}
                         <span style={{ color: 'white' }} className="transition-colors">BODY</span>
                         <span className="text-primary transition-colors">BOLT</span>
@@ -67,11 +68,12 @@ export function Navbar() {
                     </Link>
                      <button
                          onClick={() => setIsOpen(!isOpen)}
-                         className="md:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all active:scale-90"
+                         className="md:hidden flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all active:scale-90 ml-2"
                          aria-label="Toggle Menu"
                      >
                          {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                      </button>
+
 
                     <Link
                         href={getWhatsAppUrl("Member Portal Access")}
