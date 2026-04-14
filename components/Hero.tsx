@@ -115,7 +115,8 @@ export const Hero = () => {
                         className="w-40 h-40 glass rounded-full flex items-center justify-center p-8 text-center border-primary/20 backdrop-blur-3xl transform-gpu"
                     >
                         <span className="text-[7px] md:text-[8px] font-bold text-white/50 uppercase tracking-[0.2em] md:tracking-[0.3em] leading-tight text-center">
-                            Body Bolt <br /> <span className="text-primary text-lg md:text-xl">FITNESS STORE</span> <br /> 2026 Edition
+                            Body <span className="text-primary">Bolt</span> <br /> <span className="text-white text-lg md:text-xl">FITNESS STORE</span> <br /> 2026 Edition
+
                         </span>
                     </motion.div>
                 </div>
