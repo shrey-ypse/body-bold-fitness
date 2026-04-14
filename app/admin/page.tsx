@@ -378,7 +378,8 @@ const InventoryTab = ({ products, onEdit, onDelete, onAdd }: { products: Product
                     <button
                         key={cat}
                         onClick={() => setCatFilter(cat)}
-                        className={`px-8 py-3 rounded-2xl text-[10px] font-bold uppercase tracking-widest border transition-all ${catFilter === cat ? 'bg-white text-black border-white' : 'bg-transparent border-white/10 text-white/40 hover:border-white/50'}`}
+                        className={`px-8 py-3 rounded-2xl text-[10px] font-bold uppercase tracking-widest border transition-all ${catFilter === cat ? 'bg-primary text-black border-primary' : 'bg-neutral-dark/40 border-white/5 text-white/40 hover:border-white/50'}`}
+
                     >
                         {cat}
                     </button>
@@ -564,7 +565,7 @@ const ProductPowerEditor = ({
                                 type="text"
                                 value={formData.name}
                                 onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-2xl md:rounded-[2rem] p-5 md:p-8 text-xl md:text-3xl font-black text-white focus:outline-none focus:border-primary transition-all tracking-tighter"
+                                className="w-full bg-neutral-900/50 border border-white/10 rounded-2xl md:rounded-[2rem] p-5 md:p-8 text-xl md:text-3xl font-black text-white focus:outline-none focus:border-primary transition-all tracking-tighter"
                             />
                         </EditorField>
 

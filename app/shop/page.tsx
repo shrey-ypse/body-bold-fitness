@@ -69,7 +69,8 @@ function ShopContent() {
                                     placeholder="Search gear..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="bg-neutral-100 dark:bg-neutral-dark/40 border border-neutral-dark/5 dark:border-white/5 rounded-2xl py-3.5 pl-11 pr-4 text-xs font-bold uppercase tracking-widest focus:outline-none focus:border-primary/50 transition-all w-full sm:w-64"
+                                    className="bg-neutral-900/50 dark:bg-neutral-dark/40 border border-white/10 rounded-2xl py-3.5 pl-11 pr-4 text-xs font-bold text-white uppercase tracking-widest focus:outline-none focus:border-primary/50 transition-all w-full sm:w-64"
+
                                 />
                                 {searchQuery && (
                                     <button onClick={() => setSearchQuery("")} className="absolute right-4 top-1/2 -translate-y-1/2">
