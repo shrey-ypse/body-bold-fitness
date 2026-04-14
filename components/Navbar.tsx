@@ -45,14 +45,15 @@ export function Navbar() {
 
 
 
-                    <div className="hidden md:flex space-x-10 text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">
-                        <Link href="/shop?cat=strength" className="hover:text-primary hover:tracking-[0.3em] transition-all duration-300">Strength</Link>
-                        <Link href="/shop?cat=cardio" className="hover:text-primary hover:tracking-[0.3em] transition-all duration-300">Cardio</Link>
-                        <Link href="/shop" className="hover:text-primary hover:tracking-[0.3em] transition-all duration-300">Catalogue</Link>
-                        <Link href="/blog" className="hover:text-primary hover:tracking-[0.3em] transition-all duration-300">Blogs</Link>
-                        <Link href="/#community" className="hover:text-primary hover:tracking-[0.3em] transition-all duration-300">Community</Link>
-                    </div>
-                </div>
+                     <div className="hidden md:flex items-center space-x-4 lg:space-x-10 text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">
+                         <Link href="/shop?cat=strength" className="hover:text-primary hover:tracking-[0.3em] transition-all duration-300">Strength</Link>
+                         <Link href="/shop?cat=cardio" className="hover:text-primary hover:tracking-[0.3em] transition-all duration-300">Cardio</Link>
+                         <Link href="/shop" className="hover:text-primary hover:tracking-[0.3em] transition-all duration-300">Catalogue</Link>
+                         <Link href="/blog" className="hover:text-primary hover:tracking-[0.3em] transition-all duration-300">Blogs</Link>
+                         <Link href="/#community" className="hover:text-primary hover:tracking-[0.3em] transition-all duration-300 whitespace-nowrap">Community</Link>
+                     </div>
+                 </div>
+
 
                 <div className="flex items-center space-x-4 md:space-x-8">
                     <button
