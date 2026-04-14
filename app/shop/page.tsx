@@ -87,8 +87,9 @@ function ShopContent() {
                                 onClick={() => setFilter(cat)}
                                 className={`px-6 md:px-8 py-3 rounded-2xl text-[10px] md:text-xs font-extrabold uppercase tracking-widest border transition-all whitespace-nowrap transform-gpu ${filter === cat
                                     ? "bg-primary border-primary text-black shadow-lg shadow-primary/20 scale-105"
-                                    : "bg-white dark:bg-neutral-dark/20 border-neutral-dark/5 dark:border-white/5 dark:text-white/70 hover:border-primary/40"
+                                    : "bg-neutral-dark/40 border-white/5 text-white/70 hover:border-primary/40 hover:text-white"
                                     }`}
+
                             >
                                 {cat}
                             </button>
