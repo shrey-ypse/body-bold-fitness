@@ -59,7 +59,7 @@ export default function CategoryPage({ params }: { params: Promise<{ slug: strin
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.1 }}
-                                className="group flex flex-col bg-white dark:bg-neutral-dark/30 border border-neutral-dark/5 dark:border-white/5 rounded-3xl overflow-hidden hover:border-primary/20 transition-all shadow-sm hover:shadow-2xl"
+                                className="group flex flex-col bg-neutral-900/50 dark:bg-neutral-dark/40 border border-white/5 rounded-3xl overflow-hidden hover:border-primary/20 transition-all shadow-sm hover:shadow-2xl"
                             >
                                 <Link href={`/products/${product.id}`} className="block aspect-[4/5] overflow-hidden relative">
                                     <img
@@ -77,15 +77,15 @@ export default function CategoryPage({ params }: { params: Promise<{ slug: strin
                                     </div>
                                 </Link>
                                 <div className="p-8">
-                                    <h3 className="text-2xl font-bold mb-2 dark:text-white group-hover:text-primary transition-colors">{product.name}</h3>
-                                    <p className="text-sm text-neutral-dark/60 dark:text-neutral-light/60 mb-6 line-clamp-2">{product.description}</p>
+                                    <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-primary transition-colors">{product.name}</h3>
+                                    <p className="text-sm text-white/50 mb-6 line-clamp-2">{product.description}</p>
                                     <div className="flex items-center justify-between mt-auto">
-                                        <span className="text-xl font-bold dark:text-primary">{product.price}</span>
+                                        <span className="text-xl font-bold text-primary">{product.price}</span>
                                         <a
                                             href={getWhatsAppUrl(product.name)}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="px-6 py-2 bg-neutral-dark dark:bg-white text-white dark:text-black rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-primary transition-colors"
+                                            className="px-6 py-2 bg-white text-black rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-primary transition-colors"
                                         >
                                             Enquire
                                         </a>

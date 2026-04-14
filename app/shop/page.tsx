@@ -106,7 +106,7 @@ function ShopContent() {
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.9 }}
                                 transition={{ duration: 0.3 }}
-                                className="group flex flex-col bg-white dark:bg-neutral-dark/10 border border-neutral-dark/5 dark:border-white/5 rounded-[2rem] overflow-hidden hover:border-primary/20 transition-all shadow-sm hover:shadow-2xl transform-gpu"
+                                className="group flex flex-col bg-neutral-900/50 dark:bg-neutral-dark/40 border border-white/5 rounded-[2rem] overflow-hidden hover:border-primary/20 transition-all shadow-sm hover:shadow-2xl transform-gpu"
                             >
                                 <Link href={`/products/${product.id}`} className="block aspect-square overflow-hidden relative">
                                     <img
@@ -125,11 +125,11 @@ function ShopContent() {
                                         <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] text-primary mb-2 block">
                                             {product.category}
                                         </span>
-                                        <h3 className="text-xl md:text-2xl font-bold dark:text-white group-hover:text-primary transition-colors line-clamp-1 tracking-tight">{product.name}</h3>
+                                        <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-primary transition-colors line-clamp-1 tracking-tight">{product.name}</h3>
                                     </div>
                                     <div className="flex flex-col gap-4">
                                         <div className="flex items-center justify-between">
-                                            <span className="text-xl md:text-2xl font-bold dark:text-white/90">{product.price}</span>
+                                            <span className="text-xl md:text-2xl font-bold text-white/90">{product.price}</span>
                                             <Link
                                                 href={`/products/${product.id}`}
                                                 className="text-[10px] font-bold uppercase tracking-widest text-primary hover:underline"
@@ -141,12 +141,15 @@ function ShopContent() {
                                             href={getWhatsAppUrl(product.name)}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="w-full py-4 bg-neutral-dark dark:bg-white text-white dark:text-black rounded-2xl text-[10px] font-extrabold uppercase tracking-widest hover:bg-primary transition-all flex items-center justify-center shadow-lg"
+                                            className="w-full py-4 bg-white text-black rounded-2xl text-[10px] font-extrabold uppercase tracking-widest hover:bg-primary hover:text-black transition-all flex items-center justify-center shadow-lg"
                                         >
+
                                             Enquire Now
                                         </a>
                                     </div>
                                 </div>
+
+
                             </motion.div>
                         ))}
                     </AnimatePresence>

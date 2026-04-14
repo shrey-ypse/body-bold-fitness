@@ -65,9 +65,10 @@ export const Essentials = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.1 }}
                             viewport={{ once: true, margin: "-50px" }}
-                            className={`group relative overflow-hidden rounded-[2rem] md:rounded-[2.5rem] bg-neutral-100 dark:bg-neutral-dark/40 transform-gpu ${product.isLarge ? "masonry-item-large" :
+                            className={`group relative overflow-hidden rounded-[2rem] md:rounded-[2.5rem] bg-neutral-900/80 dark:bg-neutral-dark/40 transform-gpu ${product.isLarge ? "masonry-item-large" :
                                 product.isTall ? "masonry-item-tall" : ""
                                 }`}
+
                         >
                             <Link href={`/products/${product.id}`} className="block h-full w-full">
                                 <img
